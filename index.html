@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Umar Bello Tafida</title>
+<style>
+body { font-family: sans-serif; line-height: 1.6; color: #333; background: #f9f9f9; margin:0; padding:0; transition: background 0.3s, color 0.3s; }
+body.dark-mode { background: #121212; color: #e0e0e0; }
+
+header { background-color: #0d47a1; color: white; padding: 1rem; display: flex; justify-content: space-between; align-items: center; position: sticky; top:0; }
+.logo { font-weight: bold; font-size: 1.2rem; }
+
+nav { display: flex; gap: 1rem; }
+nav a { color: white; text-decoration: none; font-size: 0.95rem; }
+nav a:hover { text-decoration: underline; }
+.toggle-btn { background: white; color: #0d47a1; border: none; padding: 0.3rem 0.7rem; border-radius: 4px; cursor: pointer; font-size: 0.9rem; }
+.menu-toggle { display: none; background: none; border: none; font-size: 1.4rem; color: white; cursor: pointer; }
+
+main { padding: 2rem 1rem; max-width: 900px; margin: auto; }
+
+.hero { text-align: center; background: #e3f2fd; padding: 2rem 1rem; }
+body.dark-mode .hero { background: #1e1e1e; }
+.hero img.profile-photo { width: 140px; height: 140px; border-radius: 50%; margin-bottom: 1rem; object-fit: cover; box-shadow: 0 2px 8px rgba(0,0,0,0.3); }
+.hero h1 { font-size: 1.5rem; color: #0d47a1; margin: 0.5rem 0; }
+body.dark-mode .hero h1, body.dark-mode .hero .my-name { color: #90caf9; }
+.hero .my-name { font-size: 1.8rem; font-weight: bold; color: #0d47a1; margin: 0.5rem 0; }
+.hero p { max-width: 700px; margin: auto; font-size: 1rem; }
+
+section { margin-top: 2rem; }
+section h2 { color: #0d47a1; margin-bottom: 0.5rem; }
+body.dark-mode section h2 { color: #90caf9; }
+
+ul { list-style-type: disc; padding-left: 1.5rem; }
+
+.gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem; margin-top: 1rem; }
+.gallery img { width: 100%; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.2); object-fit: cover; }
+
+blockquote { margin: 1rem auto; padding: 0.8rem 1rem; font-style: italic; color: #555; border-left: 4px solid #0d47a1; background: rgba(0,0,0,0.05); max-width: 700px; }
+body.dark-mode blockquote { color: #ccc; border-left-color: #90caf9; background: rgba(255,255,255,0.05); }
+
+footer { text-align: center; padding: 1.2rem; background-color: #0d47a1; color: white; font-size: 0.9rem; margin-top: 2rem; }
+.social-links a { color: white; margin: 0 0.5rem; text-decoration: none; }
+.social-links a:hover { text-decoration: underline; }
+
+/* Responsive */
+@media (max-width: 768px) {
+  nav { display: none; flex-direction: column; background-color: #0d47a1; position: absolute; top: 60px; right: 0; width: 200px; padding: 1rem; }
+  nav.show { display: flex; }
+  .menu-toggle { display: block; }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">Umar Bello Tafida</div>
+  <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+  <nav id="menu">
+    <a href="#about">About</a>
+    <a href="#skills">Skills</a>
+    <a href="#leadership">Leadership</a>
+    <a href="#vision">Vision</a>
+    <a href="#gallery">Gallery</a>
+    <a href="#certificates">Certificates</a>
+    <button class="toggle-btn" onclick="toggleDarkMode()">Dark Mode</button>
+  </nav>
+</header>
+
+<main>
+  <section class="hero">
+    <img src="https://umarbellotafida.github.io/profile.webp" alt="Profile Photo" class="profile-photo">
+    <h1>Assalaamu Alaikum Warahmatullah</h1>
+    <h2 class="my-name">I’m Umar Bello Tafida</h2>
+    <p>I’m a Muslim from Rabah, Sokoto State, Nigeria — passionate about technology, leadership, and building digital tools to help my community.  
+    With over 3 years’ experience in web development (HTML, CSS & JavaScript), my dream is to turn ideas into solutions that truly help people.</p>
+  </section>
+
+  <section id="about">
+    <h2>About Me</h2>
+    <p>I co-founded Rabah Technician, a small digital startup that aimed to bring technology services to rural communities.  
+    Now I’m working to create my own chat platform, which I hope to launch soon, In sha Allahu.  
+    I started my journey before I was fully ready, and at first, I faced many challenges: limited resources and a team that didn’t share the same vision and ambition. But I never regretted trying, because every mistake became a lesson and every failure made me stronger.</p>
+    <blockquote>"Every failure teaches me something. Every mistake is a lesson that gives me experience and encourages me to create something new. Nothing in life is easy, nothing is free — but if you keep moving, nothing is impossible."</blockquote>
+  </section>
+
+  <section id="skills">
+    <h2>Technical & Educational Background</h2>
+    <ul>
+      <li>National Diploma in Computer Science (NDCS)</li>
+      <li>Currently studying Information Technology at Sokoto State University</li>
+      <li>Over 3 years’ experience in web development (HTML, CSS, JavaScript)</li>
+      <li>Cisco Networking & Cybersecurity training</li>
+    </ul>
+  </section>
+
+  <section id="leadership">
+    <h2>Leadership Experience</h2>
+    <ul>
+      <li>Financial Secretary, Students Union Government (SUG)</li>
+      <li>President, Rabah Local Government Students Association</li>
+      <li>Speaker, Students Representative Assembly (SRA)</li>
+      <li>National President, Federated Organisation of Rabah and Wurno Students (FORWS)</li>
+      <li>Public Relations Officer (PRO), National All Comrade Congress, Northwest Zone</li>
+    </ul>
+  </section>
+
+  <section id="vision">
+    <h2>My Vision</h2>
+    <p>My vision goes beyond building tech hubs in Northern Nigeria — I dream of helping my community and Africa at large to survive and thrive in the era of Artificial General Intelligence (AGI).  
+    Like when electricity first arrived, people feared it would replace jobs — but it actually created more. Today, AI and AGI can do the same if we learn to be creative, innovative, and constructive.  
+    I want to use technology to empower youth, improve agriculture, create new opportunities, and make sure no one is left behind in the digital revolution.</p>
+  </section>
+
+  <section id="gallery">
+    <h2>My Photo Gallery</h2>
+    <div class="gallery">
+      <img src="https://umarbellotafida.github.io/profile.webp" alt="Profile Photo">
+      <img src="https://umarbellotafida.github.io/office%20national%20forws.webp" alt="Office">
+      <img src="https://umarbellotafida.github.io/umar.webp" alt="Umar">
+      <img src="https://umarbellotafida.github.io/umar1.webp" alt="Umar 1">
+      <img src="https://umarbellotafida.github.io/tafida.webp" alt="Tafida">
+      <img src="https://umarbellotafida.github.io/umar2.webp" alt="Umar 2">
+    </div>
+  </section>
+
+  <section id="certificates">
+    <h2>Certificates & Achievements</h2>
+    <div class="gallery">
+            <img src="https://umarbellotafida.github.io/sug.webp" alt="SUG">
+      <img src="https://umarbellotafida.github.io/cisco.webp" alt="Cisco">
+      <img src="https://umarbellotafida.github.io/networking.webp" alt="Networking">
+      <img src="https://umarbellotafida.github.io/cybersecurity.webp" alt="Cybersecurity">
+      <img src="https://umarbellotafida.github.io/accpro.webp" alt="Account Pro">
+      <img src="https://umarbellotafida.github.io/software.webp" alt="Software">
+      <img src="https://umarbellotafida.github.io/sra.webp" alt="SRA">
+      <img src="https://umarbellotafida.github.io/acc.webp" alt="ACC">
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="social-links">
+    <a href="https://facebook.com/umarbellotafida" target="_blank">Facebook</a>
+    <a href="https://github.com/umarbellotafida" target="_blank">GitHub</a>
+    <a href="https://twitter.com/umarbellotafida" target="_blank">Twitter</a>
+    <a href="https://tiktok.com/@umarbellotafida" target="_blank">TikTok</a>
+    <a href="https://youtube.com/@umarbellotafida" target="_blank">YouTube</a>
+  </div>
+  © 2025 Umar Bello Tafida | All rights reserved.
+</footer>
+
+<script>
+function toggleDarkMode() { document.body.classList.toggle('dark-mode'); }
+function toggleMenu() { document.getElementById('menu').classList.toggle('show'); }
+</script>
+
+</body>
+</html>
