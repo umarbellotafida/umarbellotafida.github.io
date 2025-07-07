@@ -4,52 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Umar Bello Tafida</title>
-<style>
-body { font-family: sans-serif; line-height: 1.6; color: #333; background: #f9f9f9; margin:0; padding:0; transition: background 0.3s, color 0.3s; }
-body.dark-mode { background: #121212; color: #e0e0e0; }
-
-header { background-color: #0d47a1; color: white; padding: 1rem; display: flex; justify-content: space-between; align-items: center; position: sticky; top:0; }
-.logo { font-weight: bold; font-size: 1.2rem; }
-
-nav { display: flex; gap: 1rem; }
-nav a { color: white; text-decoration: none; font-size: 0.95rem; }
-nav a:hover { text-decoration: underline; }
-.toggle-btn { background: white; color: #0d47a1; border: none; padding: 0.3rem 0.7rem; border-radius: 4px; cursor: pointer; font-size: 0.9rem; }
-.menu-toggle { display: none; background: none; border: none; font-size: 1.4rem; color: white; cursor: pointer; }
-
-main { padding: 2rem 1rem; max-width: 900px; margin: auto; }
-
-.hero { text-align: center; background: #e3f2fd; padding: 2rem 1rem; }
-body.dark-mode .hero { background: #1e1e1e; }
-.hero img.profile-photo { width: 140px; height: 140px; border-radius: 50%; margin-bottom: 1rem; object-fit: cover; box-shadow: 0 2px 8px rgba(0,0,0,0.3); }
-.hero h1 { font-size: 1.5rem; color: #0d47a1; margin: 0.5rem 0; }
-body.dark-mode .hero h1, body.dark-mode .hero .my-name { color: #90caf9; }
-.hero .my-name { font-size: 1.8rem; font-weight: bold; color: #0d47a1; margin: 0.5rem 0; }
-.hero p { max-width: 700px; margin: auto; font-size: 1rem; }
-
-section { margin-top: 2rem; }
-section h2 { color: #0d47a1; margin-bottom: 0.5rem; }
-body.dark-mode section h2 { color: #90caf9; }
-
-ul { list-style-type: disc; padding-left: 1.5rem; }
-
-.gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem; margin-top: 1rem; }
-.gallery img { width: 100%; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.2); object-fit: cover; }
-
-blockquote { margin: 1rem auto; padding: 0.8rem 1rem; font-style: italic; color: #555; border-left: 4px solid #0d47a1; background: rgba(0,0,0,0.05); max-width: 700px; }
-body.dark-mode blockquote { color: #ccc; border-left-color: #90caf9; background: rgba(255,255,255,0.05); }
-
-footer { text-align: center; padding: 1.2rem; background-color: #0d47a1; color: white; font-size: 0.9rem; margin-top: 2rem; }
-.social-links a { color: white; margin: 0 0.5rem; text-decoration: none; }
-.social-links a:hover { text-decoration: underline; }
-
-/* Responsive */
-@media (max-width: 768px) {
-  nav { display: none; flex-direction: column; background-color: #0d47a1; position: absolute; top: 60px; right: 0; width: 200px; padding: 1rem; }
-  nav.show { display: flex; }
-  .menu-toggle { display: block; }
-}
-</style>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 
@@ -114,27 +69,15 @@ footer { text-align: center; padding: 1.2rem; background-color: #0d47a1; color: 
 
   <section id="gallery">
     <h2>My Photo Gallery</h2>
-    <div class="gallery">
-      <img src="https://umarbellotafida.github.io/profile.webp" alt="Profile Photo">
-      <img src="https://umarbellotafida.github.io/office%20national%20forws.webp" alt="Office">
-      <img src="https://umarbellotafida.github.io/umar.webp" alt="Umar">
-      <img src="https://umarbellotafida.github.io/umar1.webp" alt="Umar 1">
-      <img src="https://umarbellotafida.github.io/tafida.webp" alt="Tafida">
-      <img src="https://umarbellotafida.github.io/umar2.webp" alt="Umar 2">
+    <div class="slideshow-container" id="gallery-slideshow">
+      <!-- Images will change every 2 seconds by JavaScript -->
     </div>
   </section>
 
   <section id="certificates">
     <h2>Certificates & Achievements</h2>
-    <div class="gallery">
-            <img src="https://umarbellotafida.github.io/sug.webp" alt="SUG">
-      <img src="https://umarbellotafida.github.io/cisco.webp" alt="Cisco">
-      <img src="https://umarbellotafida.github.io/networking.webp" alt="Networking">
-      <img src="https://umarbellotafida.github.io/cybersecurity.webp" alt="Cybersecurity">
-      <img src="https://umarbellotafida.github.io/accpro.webp" alt="Account Pro">
-      <img src="https://umarbellotafida.github.io/software.webp" alt="Software">
-      <img src="https://umarbellotafida.github.io/sra.webp" alt="SRA">
-      <img src="https://umarbellotafida.github.io/acc.webp" alt="ACC">
+    <div class="slideshow-container" id="cert-slideshow">
+      <!-- Certificates will change every 2 seconds by JavaScript -->
     </div>
   </section>
 </main>
@@ -150,10 +93,6 @@ footer { text-align: center; padding: 1.2rem; background-color: #0d47a1; color: 
   © 2025 Umar Bello Tafida | All rights reserved.
 </footer>
 
-<script>
-function toggleDarkMode() { document.body.classList.toggle('dark-mode'); }
-function toggleMenu() { document.getElementById('menu').classList.toggle('show'); }
-</script>
-
+<script src="script.js"></script>
 </body>
 </html>
