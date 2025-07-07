@@ -1,14 +1,6 @@
-// Toggle dark mode
-function toggleDarkMode() {
-  document.body.classList.toggle('dark-mode');
-}
+// script.js
 
-// Toggle mobile menu
-function toggleMenu() {
-  document.getElementById('menu').classList.toggle('show');
-}
-
-// Photo gallery slideshow
+// Gallery images
 const galleryImages = [
   "https://umarbellotafida.github.io/profile.webp",
   "https://umarbellotafida.github.io/office%20national%20forws.webp",
@@ -18,14 +10,7 @@ const galleryImages = [
   "https://umarbellotafida.github.io/umar2.webp"
 ];
 
-let galleryIndex = 0;
-function updateGallery() {
-  const galleryContainer = document.querySelector("#gallery-slideshow img");
-  galleryContainer.src = galleryImages[galleryIndex];
-  galleryIndex = (galleryIndex + 1) % galleryImages.length;
-}
-
-// Certificates slideshow
+// Certificate images
 const certificateImages = [
   "https://umarbellotafida.github.io/sug.webp",
   "https://umarbellotafida.github.io/cisco.webp",
@@ -37,17 +22,46 @@ const certificateImages = [
   "https://umarbellotafida.github.io/acc.webp"
 ];
 
-let certIndex = 0;
-function updateCertificates() {
-  const certContainer = document.querySelector("#certificates-slideshow img");
-  certContainer.src = certificateImages[certIndex];
-  certIndex = (certIndex + 1) % certificateImages.length;
+let galleryIndex = 0;
+let certificateIndex = 0;
+
+// Show next gallery image
+function showNextGalleryImage() {
+  const img = document.querySelector("#gallery-slideshow img");
+  img.src = galleryImages[galleryIndex];
+  galleryIndex = (galleryIndex + 1) % galleryImages.length;
 }
 
-// Start slideshows
-setInterval(updateGallery, 2000);       // change every 2 seconds
-setInterval(updateCertificates, 2000);  // change every 2 seconds
+// Show next certificate image
+function showNextCertificateImage() {
+  const img = document.querySelector("#certificates-slideshow img");
+  img.src = certificateImages[certificateIndex];
+  certificateIndex = (certificateIndex + 1) % certificateImages.length;
+}
 
-// Initialize immediately
-updateGallery();
-updateCertificates();
+// Start slideshows every 2 seconds
+setInterval(showNextGalleryImage, 2000);
+setInterval(showNextCertificateImage, 2000);
+showNextGalleryImage();
+showNextCertificateImage();
+
+// Clock & date (Nigeria)
+function updateClock() {
+  const now = new Date();
+  const optionsTime = { timeZone: 'Africa/Lagos', hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: true };
+  const optionsDate = { timeZone: 'Africa/Lagos', weekday: 'short', month: 'short', day: 'numeric', year: 'numeric' };
+  document.getElementById('clock').textContent = now.toLocaleTimeString('en-NG', optionsTime);
+  document.getElementById('date').textContent = now.toLocaleDateString('en-NG', optionsDate);
+}
+setInterval(updateClock, 1000);
+updateClock();
+
+// Dark mode toggle
+function toggleDarkMode() {
+  document.body.classList.toggle('dark-mode');
+}
+
+// Menu toggle
+function toggleMenu() {
+  document.getElementById('menu').classList.toggle('show');
+}
