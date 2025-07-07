@@ -1,5 +1,4 @@
 // script.js
-
 // Gallery images
 const galleryImages = [
   "https://umarbellotafida.github.io/profile.webp",
