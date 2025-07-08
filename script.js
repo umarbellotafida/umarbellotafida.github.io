@@ -1,14 +1,15 @@
-// Toggle menu for mobile
-function toggleMenu() {
-  document.getElementById('menu').classList.toggle('show');
-}
-
-// Toggle dark mode
+// Dark mode toggle
 function toggleDarkMode() {
   document.body.classList.toggle('dark-mode');
 }
 
-// Update clock & date every second
+// Menu toggle
+function toggleMenu() {
+  const menu = document.getElementById('menu');
+  menu.classList.toggle('show');
+}
+
+// Clock & date (Nigeria)
 function updateClock() {
   const now = new Date();
   const optionsTime = { timeZone: 'Africa/Lagos', hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: true };
@@ -19,16 +20,20 @@ function updateClock() {
 setInterval(updateClock, 1000);
 updateClock();
 
-// Hero image slideshow every 2 seconds
-const heroImages = [
-  "https://umarbellotafida.github.io/profile.webp",
-  "https://umarbellotafida.github.io/umar.webp",
-  "https://umarbellotafida.github.io/umar1.webp",
-  "https://umarbellotafida.github.io/tafida.webp",
-  "https://umarbellotafida.github.io/umar2.webp"
-];
-let currentImage = 0;
-setInterval(() => {
-  currentImage = (currentImage + 1) % heroImages.length;
-  document.getElementById('hero-photo').src = heroImages[currentImage];
-}, 2000);
+// Show time effect: auto‑rotate gallery & certificate images
+function startImageSlideshow(sectionId) {
+  const container = document.querySelector(`#${sectionId} .gallery`);
+  const images = container.querySelectorAll('img');
+  let current = 0;
+
+  setInterval(() => {
+    images.forEach((img, i) => {
+      img.style.display = (i === current) ? 'block' : 'none';
+    });
+    current = (current + 1) % images.length;
+  }, 2000); // Change every 2 seconds
+}
+
+// Start slideshow for both sections
+startImageSlideshow('gallery');
+startImageSlideshow('certificates');
