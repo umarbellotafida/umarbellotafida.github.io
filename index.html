@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Umar Bello Tafida</title>
-<link rel="stylesheet" href="css/style.css">
+<title>Umar Bello Tafida | Homepage</title>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 
@@ -16,6 +16,7 @@
     <a href="#skills">Skills</a>
     <a href="#leadership">Leadership</a>
     <a href="#vision">Vision</a>
+    <a href="#time-date">Time & Date</a>
     <a href="#gallery">Gallery</a>
     <a href="#certificates">Certificates</a>
     <button class="toggle-btn" onclick="toggleDarkMode()">Dark Mode</button>
@@ -27,28 +28,21 @@
     <img src="https://umarbellotafida.github.io/profile.webp" alt="Profile Photo" class="profile-photo">
     <h1>Assalaamu Alaikum!</h1>
     <h2 class="my-name">I’m Umar Bello Tafida</h2>
-    <p>I’m a Muslim from Rabah, Sokoto State, Nigeria — passionate about technology, leadership, and building digital tools to help my community.
-    With over 3 years’ experience in web development (HTML, CSS & JavaScript), my dream is to turn ideas into solutions that truly help people.</p>
-  </section>
-
-  <section id="time-date">
-    <h2>Current Time & Date in Nigeria</h2>
-    <div id="clock">Loading time...</div>
-    <div id="date">Loading date...</div>
+    <p>I’m from Rabah, Sokoto State, Nigeria — passionate about technology, leadership, and building digital tools to help my community.</p>
   </section>
 
   <section id="about">
     <h2>About Me</h2>
-    <p>I co-founded Rabah Technician, a small digital startup that aimed to bring technology services to rural communities.
-    Now I’m working to create my own chat platform, which I hope to launch soon, In sha Allahu.</p>
+    <p>I co-founded Rabah Technician, worked on digital services, and I'm building my own chat platform. Challenges taught me valuable lessons and made me stronger.</p>
+    <blockquote>"Every failure teaches me something. Every mistake is a lesson that gives me experience and encourages me to create something new."</blockquote>
   </section>
 
   <section id="skills">
     <h2>Technical & Educational Background</h2>
     <ul>
-      <li>National Diploma in Computer Science (NDCS)</li>
+      <li>National Diploma in Computer Science</li>
       <li>Currently studying Information Technology at Sokoto State University</li>
-      <li>Over 3 years’ experience in web development</li>
+      <li>3+ years’ experience in web development (HTML, CSS, JavaScript)</li>
       <li>Cisco Networking & Cybersecurity training</li>
     </ul>
   </section>
@@ -57,14 +51,22 @@
     <h2>Leadership Experience</h2>
     <ul>
       <li>Financial Secretary, SUG</li>
-      <li>President, Rabah Local Government Students Association</li>
-      <li>Speaker, Students Representative Assembly</li>
+      <li>President, Rabah Local Govt Students Association</li>
+      <li>Speaker, Students Representative Assembly (SRA)</li>
+      <li>National President, FORWS</li>
+      <li>PRO, National All Comrade Congress (Northwest)</li>
     </ul>
   </section>
 
   <section id="vision">
     <h2>My Vision</h2>
-    <p>My vision goes beyond building tech hubs — I dream of helping my community and Africa thrive in the age of AI and AGI, empowering youth and creating opportunities.</p>
+    <p>I want to help my community and Africa adapt to the era of AGI and AI — empowering youth, improving agriculture, and creating opportunities through technology.</p>
+  </section>
+
+  <section id="time-date">
+    <h2>Current Time & Date in Nigeria</h2>
+    <div id="clock">Loading time...</div>
+    <div id="date">Loading date...</div>
   </section>
 
   <section id="gallery">
@@ -72,29 +74,26 @@
     <div class="gallery">
       <img src="https://umarbellotafida.github.io/profile.webp" alt="Profile">
       <img src="https://umarbellotafida.github.io/office%20national%20forws.webp" alt="Office">
+      <img src="https://umarbellotafida.github.io/umar.webp" alt="Umar">
+      <img src="https://umarbellotafida.github.io/umar1.webp" alt="Umar 1">
+      <img src="https://umarbellotafida.github.io/tafida.webp" alt="Tafida">
+      <img src="https://umarbellotafida.github.io/umar2.webp" alt="Umar 2">
     </div>
   </section>
 
   <section id="certificates">
     <h2>Certificates & Achievements</h2>
     <div class="gallery">
+      <img src="https://umarbellotafida.github.io/sug.webp" alt="SUG">
       <img src="https://umarbellotafida.github.io/cisco.webp" alt="Cisco">
+      <img src="https://umarbellotafida.github.io/networking.webp" alt="Networking">
       <img src="https://umarbellotafida.github.io/cybersecurity.webp" alt="Cybersecurity">
+      <img src="https://umarbellotafida.github.io/accpro.webp" alt="Account Pro">
+      <img src="https://umarbellotafida.github.io/software.webp" alt="Software">
+      <img src="https://umarbellotafida.github.io/sra.webp" alt="SRA">
+      <img src="https://umarbellotafida.github.io/acc.webp" alt="ACC">
     </div>
   </section>
-
-<script>
-  function updateClock() {
-    const now = new Date();
-    const optionsTime = { timeZone: 'Africa/Lagos', hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: true };
-    const optionsDate = { timeZone: 'Africa/Lagos', weekday: 'short', month: 'short', day: 'numeric', year: 'numeric' };
-    document.getElementById('clock').textContent = now.toLocaleTimeString('en-NG', optionsTime);
-    document.getElementById('date').textContent = now.toLocaleDateString('en-NG', optionsDate);
-  }
-  setInterval(updateClock, 1000);
-  updateClock();
-</script>
-
 </main>
 
 <footer>
@@ -108,6 +107,20 @@
   © 2025 Umar Bello Tafida | All rights reserved.
 </footer>
 
-<script src="js/script.js"></script>
+<script>
+  function toggleDarkMode() { document.body.classList.toggle('dark-mode'); }
+  function toggleMenu() { document.getElementById('menu').classList.toggle('show'); }
+
+  function updateClock() {
+    const now = new Date();
+    const optionsTime = { timeZone: 'Africa/Lagos', hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: true };
+    const optionsDate = { timeZone: 'Africa/Lagos', weekday: 'short', month: 'short', day: 'numeric', year: 'numeric' };
+    document.getElementById('clock').textContent = now.toLocaleTimeString('en-NG', optionsTime);
+    document.getElementById('date').textContent = now.toLocaleDateString('en-NG', optionsDate);
+  }
+  setInterval(updateClock, 1000);
+  updateClock();
+</script>
+
 </body>
 </html>
