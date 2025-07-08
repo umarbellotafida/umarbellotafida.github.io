@@ -65,3 +65,16 @@ function toggleDarkMode() {
 function toggleMenu() {
   document.getElementById('menu').classList.toggle('show');
 }
+
+// Clock & date (Nigeria)
+function updateClock() {
+  const now = new Date();
+  const optionsTime = { timeZone: 'Africa/Lagos', hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: true };
+  const optionsDate = { timeZone: 'Africa/Lagos', weekday: 'short', month: 'short', day: 'numeric', year: 'numeric' };
+  document.getElementById('clock').textContent = now.toLocaleTimeString('en-NG', optionsTime);
+  document.getElementById('date').textContent = now.toLocaleDateString('en-NG', optionsDate);
+}
+setInterval(updateClock, 1000);
+updateClock();
+
+// (Optional) If you want automatic slideshow later, we can add it here
