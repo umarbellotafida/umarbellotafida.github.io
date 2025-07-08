@@ -14,6 +14,7 @@ body.dark-mode {
   color: #e0e0e0;
 }
 
+/* Header */
 header {
   background-color: #0d47a1;
   color: white;
@@ -23,12 +24,20 @@ header {
   align-items: center;
   position: sticky;
   top: 0;
-  z-index: 1000;
 }
 
 .logo {
   font-weight: bold;
   font-size: 1.2rem;
+}
+
+.menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 1.4rem;
+  color: white;
+  cursor: pointer;
 }
 
 nav {
@@ -56,15 +65,7 @@ nav a:hover {
   font-size: 0.9rem;
 }
 
-.menu-toggle {
-  display: none;
-  background: none;
-  border: none;
-  font-size: 1.4rem;
-  color: white;
-  cursor: pointer;
-}
-
+/* Main content */
 main {
   padding: 2rem 1rem;
   max-width: 900px;
@@ -109,10 +110,9 @@ body.dark-mode .hero .my-name {
   color: #90caf9;
 }
 
-.hero p {
-  max-width: 700px;
-  margin: auto;
+#clock, #date {
   font-size: 1rem;
+  margin: 0.2rem;
 }
 
 /* Sections */
@@ -129,11 +129,28 @@ body.dark-mode section h2 {
   color: #90caf9;
 }
 
+/* Lists */
 ul {
   list-style-type: disc;
   padding-left: 1.5rem;
 }
 
+/* Gallery */
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.gallery img {
+  width: 100%;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  object-fit: cover;
+}
+
+/* Blockquote */
 blockquote {
   margin: 1rem auto;
   padding: 0.8rem 1rem;
@@ -148,30 +165,6 @@ body.dark-mode blockquote {
   color: #ccc;
   border-left-color: #90caf9;
   background: rgba(255,255,255,0.05);
-}
-
-#time-date-hero {
-  font-size: 1rem;
-  margin: 0.5rem 0;
-}
-
-#clock, #date {
-  margin: 0.2rem 0;
-}
-
-/* Gallery and certificates */
-.gallery {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-  gap: 1rem;
-  margin-top: 1rem;
-}
-
-.gallery img {
-  width: 100%;
-  border-radius: 8px;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-  object-fit: cover;
 }
 
 /* Footer */
@@ -199,7 +192,7 @@ footer p {
   text-decoration: underline;
 }
 
-/* Responsive adjustments */
+/* Responsive */
 @media (max-width: 768px) {
   nav {
     display: none;
