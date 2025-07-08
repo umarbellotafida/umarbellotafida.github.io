@@ -235,3 +235,15 @@ footer p {
     grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
   }
 }
+
+.gallery img {
+  width: 100%;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  object-fit: cover;
+  display: none; /* hide all by default, JS will show */
+}
+
+.gallery img:first-child {
+  display: block; /* show the first image initially */
+}
