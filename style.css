@@ -23,6 +23,7 @@ header {
   align-items: center;
   position: sticky;
   top: 0;
+  z-index: 1000;
 }
 
 .logo {
@@ -70,6 +71,7 @@ main {
   margin: auto;
 }
 
+/* Hero section */
 .hero {
   text-align: center;
   background: #e3f2fd;
@@ -113,6 +115,7 @@ body.dark-mode .hero .my-name {
   font-size: 1rem;
 }
 
+/* Sections */
 section {
   margin-top: 2rem;
 }
@@ -131,6 +134,33 @@ ul {
   padding-left: 1.5rem;
 }
 
+blockquote {
+  margin: 1rem auto;
+  padding: 0.8rem 1rem;
+  font-style: italic;
+  color: #555;
+  border-left: 4px solid #0d47a1;
+  background: rgba(0,0,0,0.05);
+  max-width: 700px;
+}
+
+body.dark-mode blockquote {
+  color: #ccc;
+  border-left-color: #90caf9;
+  background: rgba(255,255,255,0.05);
+}
+
+/* Time & date section */
+#time-date {
+  text-align: center;
+}
+
+#clock, #date {
+  font-size: 1.2rem;
+  margin: 0.3rem 0;
+}
+
+/* Gallery and certificates */
 .gallery {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
@@ -145,29 +175,7 @@ ul {
   object-fit: cover;
 }
 
-#time-date {
-  text-align: center;
-  margin-top: 2rem;
-}
-
-#clock {
-  font-size: 1.5rem;
-  color: #0d47a1;
-}
-
-#date {
-  font-size: 1rem;
-  color: #555;
-}
-
-body.dark-mode #clock {
-  color: #90caf9;
-}
-
-body.dark-mode #date {
-  color: #ccc;
-}
-
+/* Footer */
 footer {
   text-align: center;
   padding: 1.2rem;
@@ -177,10 +185,15 @@ footer {
   margin-top: 2rem;
 }
 
+footer p {
+  margin: 0.5rem 0;
+}
+
 .social-links a {
   color: white;
   margin: 0 0.5rem;
   text-decoration: none;
+  font-size: 0.95rem;
 }
 
 .social-links a:hover {
