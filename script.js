@@ -20,20 +20,17 @@ function updateClock() {
 setInterval(updateClock, 1000);
 updateClock();
 
-// Show time effect: auto‑rotate gallery & certificate images
+// Slideshow for gallery & certificates
 function startImageSlideshow(sectionId) {
   const container = document.querySelector(`#${sectionId} .gallery`);
   const images = container.querySelectorAll('img');
   let current = 0;
-
   setInterval(() => {
     images.forEach((img, i) => {
       img.style.display = (i === current) ? 'block' : 'none';
     });
     current = (current + 1) % images.length;
-  }, 2000); // Change every 2 seconds
+  }, 2000); // every 2 seconds
 }
-
-// Start slideshow for both sections
 startImageSlideshow('gallery');
 startImageSlideshow('certificates');
