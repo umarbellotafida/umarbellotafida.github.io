@@ -150,14 +150,13 @@ body.dark-mode blockquote {
   background: rgba(255,255,255,0.05);
 }
 
-/* Time & date section */
-#time-date {
-  text-align: center;
+#time-date-hero {
+  font-size: 1rem;
+  margin: 0.5rem 0;
 }
 
 #clock, #date {
-  font-size: 1.2rem;
-  margin: 0.3rem 0;
+  margin: 0.2rem 0;
 }
 
 /* Gallery and certificates */
