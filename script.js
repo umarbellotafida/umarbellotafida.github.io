@@ -20,7 +20,7 @@ function updateClock() {
 setInterval(updateClock, 1000);
 updateClock();
 
-// Slideshow for gallery & certificates
+// Slideshow for gallery & certificates every 2 seconds
 function startImageSlideshow(sectionId) {
   const container = document.querySelector(`#${sectionId} .gallery`);
   const images = container.querySelectorAll('img');
@@ -30,7 +30,7 @@ function startImageSlideshow(sectionId) {
       img.style.display = (i === current) ? 'block' : 'none';
     });
     current = (current + 1) % images.length;
-  }, 2000); // every 2 seconds
+  }, 2000);
 }
 startImageSlideshow('gallery');
 startImageSlideshow('certificates');
