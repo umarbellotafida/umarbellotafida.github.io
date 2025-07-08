@@ -14,7 +14,6 @@ body.dark-mode {
   color: #e0e0e0;
 }
 
-/* Header */
 header {
   background-color: #0d47a1;
   color: white;
@@ -65,14 +64,12 @@ nav a:hover {
   cursor: pointer;
 }
 
-/* Main content */
 main {
   padding: 2rem 1rem;
   max-width: 900px;
   margin: auto;
 }
 
-/* Hero section */
 .hero {
   text-align: center;
   background: #e3f2fd;
@@ -116,7 +113,6 @@ body.dark-mode .hero .my-name {
   font-size: 1rem;
 }
 
-/* Sections */
 section {
   margin-top: 2rem;
 }
@@ -130,45 +126,48 @@ body.dark-mode section h2 {
   color: #90caf9;
 }
 
-/* Lists */
 ul {
   list-style-type: disc;
   padding-left: 1.5rem;
 }
 
-/* Gallery & slideshow */
-.gallery, .slideshow-container {
+.gallery {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
   gap: 1rem;
   margin-top: 1rem;
 }
 
-.gallery img, .slideshow-container img {
+.gallery img {
   width: 100%;
   border-radius: 8px;
   box-shadow: 0 2px 5px rgba(0,0,0,0.2);
   object-fit: cover;
 }
 
-/* Blockquote */
-blockquote {
-  margin: 1rem auto;
-  padding: 0.8rem 1rem;
-  font-style: italic;
+#time-date {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+#clock {
+  font-size: 1.5rem;
+  color: #0d47a1;
+}
+
+#date {
+  font-size: 1rem;
   color: #555;
-  border-left: 4px solid #0d47a1;
-  background: rgba(0,0,0,0.05);
-  max-width: 700px;
 }
 
-body.dark-mode blockquote {
+body.dark-mode #clock {
+  color: #90caf9;
+}
+
+body.dark-mode #date {
   color: #ccc;
-  border-left-color: #90caf9;
-  background: rgba(255,255,255,0.05);
 }
 
-/* Footer */
 footer {
   text-align: center;
   padding: 1.2rem;
@@ -178,15 +177,10 @@ footer {
   margin-top: 2rem;
 }
 
-footer p {
-  margin: 0.5rem 0;
-}
-
 .social-links a {
   color: white;
   margin: 0 0.5rem;
   text-decoration: none;
-  font-size: 0.95rem;
 }
 
 .social-links a:hover {
@@ -232,7 +226,7 @@ footer p {
     font-size: 1.2rem;
   }
 
-  .gallery, .slideshow-container {
+  .gallery {
     grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
   }
 }
