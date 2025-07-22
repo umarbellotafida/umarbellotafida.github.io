@@ -8,7 +8,190 @@ document.addEventListener('DOMContentLoaded', () => {
   initImageSlideshows();
   initCurrentYear();
   initProjectCards();
+  populateContent();
 });
+
+// Content Data - Replace with your actual information
+const portfolioData = {
+  expertise: [
+    {
+      icon: 'fa-microchip',
+      title: 'Computer Systems Engineering',
+      items: [
+        'Computer Architecture Design',
+        'Embedded Systems Development',
+        'Network Systems Integration',
+        'FPGA Programming'
+      ]
+    },
+    {
+      icon: 'fa-shield-alt',
+      title: 'Cybersecurity',
+      items: [
+        'Information Security Management',
+        'Network Security Architecture',
+        'Penetration Testing',
+        'Cryptographic Systems'
+      ]
+    },
+    {
+      icon: 'fa-robot',
+      title: 'Artificial Intelligence',
+      items: [
+        'Machine Learning Systems',
+        'Computer Vision Applications',
+        'Natural Language Processing',
+        'Neural Network Optimization'
+      ]
+    }
+  ],
+  projects: [
+    {
+      title: 'Rabah Technician Platform',
+      tech: 'Node.js, MongoDB, React, OAuth 2.0',
+      description: 'Secure digital payment gateway for rural communities with multi-factor authentication and fraud detection systems',
+      codeLink: '#',
+      demoLink: '#'
+    },
+    {
+      title: 'Secure Chat Platform',
+      tech: 'WebSockets, E2E Encryption, React',
+      description: 'Privacy-focused messaging platform with military-grade encryption',
+      codeLink: '#',
+      demoLink: '#'
+    },
+    {
+      title: 'IoT Agricultural Monitoring',
+      tech: 'Raspberry Pi, LoRaWAN, TensorFlow Lite',
+      description: 'Edge computing solution for crop monitoring with predictive analytics',
+      codeLink: '#',
+      demoLink: '#'
+    }
+  ],
+  certifications: [
+    {
+      image: 'https://umarbellotafida.github.io/cisco.webp',
+      title: 'Cisco Certified Network Associate',
+      description: 'Specialized in network security and infrastructure protection',
+      year: '2020'
+    },
+    {
+      image: 'https://umarbellotafida.github.io/cybersecurity.webp',
+      title: 'CISSP Certification',
+      description: 'Certified Information Systems Security Professional',
+      year: '2019'
+    }
+  ],
+  education: [
+    {
+      institution: 'Sokoto State University',
+      degree: 'BSc Information Technology (In Progress)',
+      courses: 'Relevant Courses: Computer Architecture, Network Security, Data Structures, Cryptography'
+    },
+    {
+      institution: 'Alison Online',
+      degree: 'Diploma in Certified Information Security System Professional',
+      grade: 'Grade: A (2019)'
+    },
+    {
+      institution: 'National Diploma in Computer Science',
+      courses: 'Key Studies: Computer Hardware, Programming, Database Systems'
+    }
+  ],
+  gallery: [
+    {
+      image: 'https://umarbellotafida.github.io/office%20national%20forws.webp',
+      caption: 'Presenting technical education proposal'
+    },
+    {
+      image: 'https://umarbellotafida.github.io/cisco.webp',
+      caption: 'Cisco Networking Certification'
+    },
+    {
+      image: 'https://umarbellotafida.github.io/cybersecurity.webp',
+      caption: 'Cybersecurity Achievement'
+    },
+    {
+      image: 'https://umarbellotafida.github.io/profile.webp',
+      caption: 'Professional Profile'
+    }
+  ]
+};
+
+// Populate content from data
+function populateContent() {
+  // Populate Expertise
+  const expertiseGrid = document.querySelector('.expertise-grid');
+  portfolioData.expertise.forEach(item => {
+    const card = document.createElement('div');
+    card.className = 'expertise-card';
+    card.innerHTML = `
+      <div class="expertise-icon"><i class="fas ${item.icon}"></i></div>
+      <h3>${item.title}</h3>
+      <ul>
+        ${item.items.map(skill => `<li>${skill}</li>`).join('')}
+      </ul>
+    `;
+    expertiseGrid.appendChild(card);
+  });
+
+  // Populate Projects
+  const projectGrid = document.querySelector('.project-cards');
+  portfolioData.projects.forEach(project => {
+    const card = document.createElement('div');
+    card.className = 'project-card';
+    card.innerHTML = `
+      <h3>${project.title}</h3>
+      <p class="tech-stack">Tech: ${project.tech}</p>
+      <p>${project.description}</p>
+      <div class="project-links">
+        <a href="${project.codeLink}" class="code-link">View Code</a>
+        <a href="${project.demoLink}" class="demo-link">Case Study</a>
+      </div>
+    `;
+    projectGrid.appendChild(card);
+  });
+
+  // Populate Certifications
+  const cyberGrid = document.querySelector('.cyber-grid');
+  portfolioData.certifications.forEach(cert => {
+    const card = document.createElement('div');
+    card.className = 'certification-card';
+    card.innerHTML = `
+      <img src="${cert.image}" alt="${cert.title}">
+      <h3>${cert.title}</h3>
+      <p>${cert.description}</p>
+      <div class="cert-date">${cert.year}</div>
+    `;
+    cyberGrid.appendChild(card);
+  });
+
+  // Populate Education
+  const educationTimeline = document.querySelector('.education-timeline');
+  portfolioData.education.forEach(edu => {
+    const item = document.createElement('div');
+    item.className = 'education-item';
+    item.innerHTML = `
+      <h3>${edu.institution}</h3>
+      ${edu.degree ? `<p class="degree">${edu.degree}</p>` : ''}
+      ${edu.grade ? `<p class="grade">${edu.grade}</p>` : ''}
+      ${edu.courses ? `<p class="courses">${edu.courses}</p>` : ''}
+    `;
+    educationTimeline.appendChild(item);
+  });
+
+  // Populate Gallery
+  const galleryGrid = document.querySelector('.gallery-grid');
+  portfolioData.gallery.forEach(img => {
+    const item = document.createElement('div');
+    item.className = 'gallery-item';
+    item.innerHTML = `
+      <img src="${img.image}" alt="${img.caption}">
+      <p>${img.caption}</p>
+    `;
+    galleryGrid.appendChild(item);
+  });
+}
 
 // Enhanced Dark Mode with Local Storage
 function initDarkMode() {
@@ -19,13 +202,15 @@ function initDarkMode() {
   // Set initial mode
   if (storedMode === 'dark' || (!storedMode && prefersDark)) {
     document.body.classList.add('dark-mode');
-    toggleBtn.textContent = 'Light Mode';
+    toggleBtn.innerHTML = '<i class="fas fa-sun"></i> Light Mode';
   }
 
   toggleBtn.addEventListener('click', () => {
     document.body.classList.toggle('dark-mode');
     const isDark = document.body.classList.contains('dark-mode');
-    toggleBtn.textContent = isDark ? 'Light Mode' : 'Terminal Mode';
+    toggleBtn.innerHTML = isDark 
+      ? '<i class="fas fa-sun"></i> Light Mode' 
+      : '<i class="fas fa-moon"></i> Dark Mode';
     localStorage.setItem('portfolio-theme', isDark ? 'dark' : 'light');
   });
 }
@@ -35,10 +220,13 @@ function initMenu() {
   const menuToggle = document.querySelector('.menu-toggle');
   const menu = document.getElementById('menu');
   
-  menuToggle.addEventListener('click', () => {
+  menuToggle.addEventListener('click', (e) => {
+    e.stopPropagation();
     const isExpanded = menu.classList.toggle('show');
     menuToggle.setAttribute('aria-expanded', isExpanded);
-    menuToggle.textContent = isExpanded ? '✕' : '☰';
+    menuToggle.innerHTML = isExpanded 
+      ? '<i class="fas fa-times"></i>' 
+      : '<i class="fas fa-bars"></i>';
   });
   
   // Close menu when clicking outside
@@ -46,7 +234,7 @@ function initMenu() {
     if (!menu.contains(e.target) && e.target !== menuToggle) {
       menu.classList.remove('show');
       menuToggle.setAttribute('aria-expanded', 'false');
-      menuToggle.textContent = '☰';
+      menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
     }
   });
 }
@@ -70,8 +258,8 @@ function initClock() {
     const timeStr = now.toLocaleTimeString('en-NG', options);
     const dateStr = now.toLocaleDateString('en-NG', options);
     
-    document.getElementById('clock').textContent = timeStr;
-    document.getElementById('date').textContent = dateStr;
+    document.getElementById('clock').innerHTML = `<i class="fas fa-clock"></i> ${timeStr}`;
+    document.getElementById('date').innerHTML = `<i class="fas fa-calendar-alt"></i> ${dateStr}`;
   };
   
   formatTimeDate();
@@ -235,4 +423,25 @@ function initProjectCards() {
     links.style.transform = 'translateY(10px)';
     links.style.transition = 'all 0.3s ease';
   });
+}
+
+// Public functions for HTML onclick handlers
+function toggleDarkMode() {
+  document.body.classList.toggle('dark-mode');
+  const toggleBtn = document.querySelector('.toggle-btn');
+  const isDark = document.body.classList.contains('dark-mode');
+  toggleBtn.innerHTML = isDark 
+    ? '<i class="fas fa-sun"></i> Light Mode' 
+    : '<i class="fas fa-moon"></i> Dark Mode';
+  localStorage.setItem('portfolio-theme', isDark ? 'dark' : 'light');
+}
+
+function toggleMenu() {
+  const menuToggle = document.querySelector('.menu-toggle');
+  const menu = document.getElementById('menu');
+  const isExpanded = menu.classList.toggle('show');
+  menuToggle.setAttribute('aria-expanded', isExpanded);
+  menuToggle.innerHTML = isExpanded 
+    ? '<i class="fas fa-times"></i>' 
+    : '<i class="fas fa-bars"></i>';
 }
