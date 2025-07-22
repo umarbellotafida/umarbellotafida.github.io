@@ -1,36 +1,238 @@
-// Dark mode toggle
-function toggleDarkMode() {
-  document.body.classList.toggle('dark-mode');
+// Computer Engineering Portfolio JS
+document.addEventListener('DOMContentLoaded', () => {
+  // Initialize all components
+  initDarkMode();
+  initMenu();
+  initClock();
+  initTypewriter();
+  initImageSlideshows();
+  initCurrentYear();
+  initProjectCards();
+});
+
+// Enhanced Dark Mode with Local Storage
+function initDarkMode() {
+  const toggleBtn = document.querySelector('.toggle-btn');
+  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  const storedMode = localStorage.getItem('portfolio-theme');
+  
+  // Set initial mode
+  if (storedMode === 'dark' || (!storedMode && prefersDark)) {
+    document.body.classList.add('dark-mode');
+    toggleBtn.textContent = 'Light Mode';
+  }
+
+  toggleBtn.addEventListener('click', () => {
+    document.body.classList.toggle('dark-mode');
+    const isDark = document.body.classList.contains('dark-mode');
+    toggleBtn.textContent = isDark ? 'Light Mode' : 'Terminal Mode';
+    localStorage.setItem('portfolio-theme', isDark ? 'dark' : 'light');
+  });
 }
 
-// Menu toggle
-function toggleMenu() {
+// Improved Menu Toggle with Accessibility
+function initMenu() {
+  const menuToggle = document.querySelector('.menu-toggle');
   const menu = document.getElementById('menu');
-  menu.classList.toggle('show');
+  
+  menuToggle.addEventListener('click', () => {
+    const isExpanded = menu.classList.toggle('show');
+    menuToggle.setAttribute('aria-expanded', isExpanded);
+    menuToggle.textContent = isExpanded ? '✕' : '☰';
+  });
+  
+  // Close menu when clicking outside
+  document.addEventListener('click', (e) => {
+    if (!menu.contains(e.target) && e.target !== menuToggle) {
+      menu.classList.remove('show');
+      menuToggle.setAttribute('aria-expanded', 'false');
+      menuToggle.textContent = '☰';
+    }
+  });
 }
 
-// Clock & date (Nigeria)
-function updateClock() {
-  const now = new Date();
-  const optionsTime = { timeZone: 'Africa/Lagos', hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: true };
-  const optionsDate = { timeZone: 'Africa/Lagos', weekday: 'short', month: 'short', day: 'numeric', year: 'numeric' };
-  document.getElementById('clock').textContent = now.toLocaleTimeString('en-NG', optionsTime);
-  document.getElementById('date').textContent = now.toLocaleDateString('en-NG', optionsDate);
+// Enhanced Clock with Nigerian Timezone
+function initClock() {
+  const formatTimeDate = () => {
+    const now = new Date();
+    const options = { 
+      timeZone: 'Africa/Lagos',
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit',
+      hour12: true,
+      weekday: 'short',
+      month: 'short',
+      day: 'numeric',
+      year: 'numeric'
+    };
+    
+    const timeStr = now.toLocaleTimeString('en-NG', options);
+    const dateStr = now.toLocaleDateString('en-NG', options);
+    
+    document.getElementById('clock').textContent = timeStr;
+    document.getElementById('date').textContent = dateStr;
+  };
+  
+  formatTimeDate();
+  setInterval(formatTimeDate, 1000);
 }
-setInterval(updateClock, 1000);
-updateClock();
 
-// Slideshow for gallery & certificates every 2 seconds
-function startImageSlideshow(sectionId) {
-  const container = document.querySelector(`#${sectionId} .gallery`);
-  const images = container.querySelectorAll('img');
-  let current = 0;
-  setInterval(() => {
-    images.forEach((img, i) => {
-      img.style.display = (i === current) ? 'block' : 'none';
+// Engineering Terminal Typewriter Effect
+function initTypewriter() {
+  const terminal = document.getElementById('typewriter');
+  if (!terminal) return;
+  
+  const messages = [
+    "> Welcome to Engr. Umar's portfolio",
+    "> Loading cybersecurity modules...",
+    "> Initializing AI research projects...",
+    "> Booting embedded systems...",
+    "> Systems operational. Ready for commands."
+  ];
+  
+  let i = 0;
+  let j = 0;
+  let currentMessage = '';
+  let isDeleting = false;
+  let isPaused = false;
+
+  function type() {
+    if (isPaused) return;
+    
+    currentMessage = messages[i];
+    
+    if (isDeleting) {
+      terminal.innerHTML = `> ${currentMessage.substring(0, j--)}_`;
+      if (j < 0) {
+        isDeleting = false;
+        i = (i + 1) % messages.length;
+        isPaused = true;
+        setTimeout(() => {
+          isPaused = false;
+          type();
+        }, 500);
+      }
+    } else {
+      terminal.innerHTML = `> ${currentMessage.substring(0, j++)}_`;
+      if (j > currentMessage.length) {
+        isDeleting = true;
+        isPaused = true;
+        setTimeout(() => {
+          isPaused = false;
+          type();
+        }, 2000);
+        return;
+      }
+    }
+    
+    const speed = isDeleting ? 50 : Math.random() * 50 + 50;
+    setTimeout(type, speed);
+  }
+  
+  // Start with a delay
+  setTimeout(type, 1000);
+}
+
+// Modern Image Gallery with Controls
+function initImageSlideshows() {
+  const galleries = [
+    { id: 'gallery', interval: 3000 },
+    { id: 'certificates', interval: 4000 }
+  ];
+  
+  galleries.forEach(({ id, interval }) => {
+    const container = document.querySelector(`#${id} .gallery`);
+    if (!container) return;
+    
+    const images = Array.from(container.querySelectorAll('img'));
+    if (images.length <= 1) return;
+    
+    let current = 0;
+    let timer;
+    
+    const showImage = (index) => {
+      images.forEach((img, i) => {
+        img.style.display = i === index ? 'block' : 'none';
+      });
+      current = index;
+    };
+    
+    const nextImage = () => {
+      showImage((current + 1) % images.length);
+    };
+    
+    // Add navigation controls if more than 3 images
+    if (images.length > 3) {
+      const nav = document.createElement('div');
+      nav.className = 'gallery-nav';
+      
+      images.forEach((_, i) => {
+        const dot = document.createElement('button');
+        dot.className = 'gallery-dot';
+        dot.addEventListener('click', () => {
+          clearInterval(timer);
+          showImage(i);
+          startTimer();
+        });
+        nav.appendChild(dot);
+      });
+      
+      container.parentNode.insertBefore(nav, container.nextSibling);
+      updateDots();
+    }
+    
+    const startTimer = () => {
+      clearInterval(timer);
+      timer = setInterval(nextImage, interval);
+    };
+    
+    const updateDots = () => {
+      const dots = container.parentNode.querySelectorAll('.gallery-dot');
+      dots.forEach((dot, i) => {
+        dot.classList.toggle('active', i === current);
+      });
+    };
+    
+    // Initialize
+    showImage(0);
+    startTimer();
+    
+    // Pause on hover
+    container.addEventListener('mouseenter', () => clearInterval(timer));
+    container.addEventListener('mouseleave', startTimer);
+  });
+}
+
+// Update copyright year automatically
+function initCurrentYear() {
+  const yearElement = document.getElementById('current-year');
+  if (yearElement) {
+    yearElement.textContent = new Date().getFullYear();
+  }
+}
+
+// Interactive Project Cards
+function initProjectCards() {
+  const projectCards = document.querySelectorAll('.project-card');
+  
+  projectCards.forEach(card => {
+    const links = card.querySelector('.project-links');
+    if (!links) return;
+    
+    card.addEventListener('mouseenter', () => {
+      links.style.opacity = '1';
+      links.style.transform = 'translateY(0)';
     });
-    current = (current + 1) % images.length;
-  }, 2000);
+    
+    card.addEventListener('mouseleave', () => {
+      links.style.opacity = '0';
+      links.style.transform = 'translateY(10px)';
+    });
+    
+    // Initialize state
+    links.style.opacity = '0';
+    links.style.transform = 'translateY(10px)';
+    links.style.transition = 'all 0.3s ease';
+  });
 }
-startImageSlideshow('gallery');
-startImageSlideshow('certificates');
