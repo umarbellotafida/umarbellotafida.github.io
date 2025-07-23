@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Engr. Umar Bello Tafida | Computer Engineer</title>
 <link rel="stylesheet" href="style.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
 
@@ -31,6 +30,7 @@
       <h1>Assalaamu Alaikum!</h1>
       <div id="time-date-hero">
         <div id="clock">Loading time...</div>
+     
       </div>
       <h2 class="my-name">I'm Engr. Umar Bello Tafida, CISSP</h2>
       <p class="title">Computer Systems Engineer | Cybersecurity Specialist | AI Researcher</p>
@@ -129,14 +129,14 @@
   
   <div class="cyber-grid">
     <div class="certification-card">
-      <img src="https://umarbellotafida.github.io/cisco.webp" alt="Cisco Certification" loading="lazy">
+      <img src="https://umarbellotafida.github.io/cisco.webp" alt="Cisco Certification">
       <h3>Cisco Certified Network Associate</h3>
       <p>Specialized in network security and infrastructure protection</p>
       <div class="cert-date">2020</div>
     </div>
     
     <div class="certification-card">
-      <img src="https://umarbellotafida.github.io/cybersecurity.webp" alt="Cybersecurity Certification" loading="lazy">
+      <img src="https://umarbellotafida.github.io/cybersecurity.webp" alt="Cybersecurity Certification">
       <h3>CISSP Certification</h3>
       <p>Certified Information Systems Security Professional</p>
       <div class="cert-date">2019</div>
@@ -244,25 +244,23 @@
 
 <section id="gallery">
   <h2>Technical Gallery</h2>
-  <div class="gallery-container">
-    <div class="gallery-slideshow">
-      <img src="https://umarbellotafida.github.io/office%20national%20forws.webp" alt="FORWS Leadership" class="active" loading="lazy">
-      <img src="https://umarbellotafida.github.io/cisco.webp" alt="Cisco Certification" loading="lazy">
-      <img src="https://umarbellotafida.github.io/cybersecurity.webp" alt="Cybersecurity Certification" loading="lazy">
-      <img src="https://umarbellotafida.github.io/profile.webp" alt="Professional Profile" loading="lazy">
+  <div class="gallery-grid">
+    <div class="gallery-item">
+      <img src="https://umarbellotafida.github.io/office%20national%20forws.webp" alt="FORWS Leadership">
+      <p>Presenting technical education proposal</p>
     </div>
-    <div class="gallery-nav"></div>
-  </div>
-</section>
-
-<section id="certificates">
-  <h2>Certificates</h2>
-  <div class="certificates-container">
-    <div class="certificates-slideshow">
-      <img src="https://umarbellotafida.github.io/cisco.webp" alt="Cisco Certification" class="active" loading="lazy">
-      <img src="https://umarbellotafida.github.io/cybersecurity.webp" alt="Cybersecurity Certification" loading="lazy">
+    <div class="gallery-item">
+      <img src="https://umarbellotafida.github.io/cisco.webp" alt="Cisco Certification">
+      <p>Cisco Networking Certification</p>
     </div>
-    <div class="certificates-nav"></div>
+    <div class="gallery-item">
+      <img src="https://umarbellotafida.github.io/cybersecurity.webp" alt="Cybersecurity Certification">
+      <p>Cybersecurity Achievement</p>
+    </div>
+    <div class="gallery-item">
+      <img src="https://umarbellotafida.github.io/profile.webp" alt="Professional Profile">
+      <p>Computer Engineer Profile</p>
+    </div>
   </div>
 </section>
 </main>
@@ -301,118 +299,46 @@
     </form>
 
     <div class="social-links">
+      <!-- Your social media links remain unchanged -->
       <a href="https://github.com/umarbellotafida" target="_blank" class="github" title="GitHub">
-        <i class="fab fa-github"></i> GitHub
+        <i class="fab fa-github"></i>
       </a>
       <a href="https://linkedin.com/in/umarbellotafida" target="_blank" class="linkedin" title="LinkedIn">
-        <i class="fab fa-linkedin"></i> LinkedIn
+        <i class="fab fa-linkedin"></i>
       </a>
-      <a href="https://facebook.com/umarbellotafida" target="_blank" class="facebook" title="Facebook">
-        <i class="fab fa-facebook"></i> Facebook
-      </a>
-      <a href="https://twitter.com/umarbellotafida" target="_blank" class="twitter" title="Twitter">
-        <i class="fab fa-twitter"></i> Twitter
-      </a>
-      <a href="https://youtube.com/@umarbellotafida" target="_blank" class="youtube" title="YouTube">
-        <i class="fab fa-youtube"></i> YouTube
-      </a>
-    </div>
+      <!-- Other social links -->
+     <div class="social-links">
+    <a href="https://facebook.com/umarbellotafida" target="_blank">Facebook</a>
+    <a href="https://github.com/umarbellotafida" target="_blank">GitHub</a>
+    <a href="https://twitter.com/umarbellotafida" target="_blank">Twitter</a>
+    <a href="https://tiktok.com/@umarbellotafida" target="_blank">TikTok</a>
+    <a href="https://youtube.com/@umarbellotafida" target="_blank">YouTube</a>
   </div>
   
   <div class="footer-copyright">
     © <span id="current-year">2025</span> Engr. Umar Bello Tafida, CCNA, CISSP
   </div>
 </footer>
-
 <script src="script.js"></script>
 <script>
-  // Enhanced slideshow functionality
-  function initSlideshows() {
-    const slideshowContainers = document.querySelectorAll('.gallery-container, .certificates-container');
-    
-    slideshowContainers.forEach(container => {
-      const slideshow = container.querySelector('.gallery-slideshow, .certificates-slideshow');
-      const images = slideshow.querySelectorAll('img');
-      const nav = container.querySelector('.gallery-nav, .certificates-nav');
-      
-      if (images.length <= 1) return;
-      
-      let currentIndex = 0;
-      let timer;
-      const interval = 2000; // 2 seconds
-      
-      // Create navigation dots
-      images.forEach((_, index) => {
-        const dot = document.createElement('button');
-        dot.className = container.classList.contains('gallery-container') ? 'gallery-dot' : 'certificates-dot';
-        dot.addEventListener('click', () => {
-          goToSlide(index);
-          resetTimer();
-        });
-        nav.appendChild(dot);
-      });
-      
-      const dots = nav.querySelectorAll('button');
-      
-      function goToSlide(index) {
-        // Hide all images and dots
-        images.forEach(img => img.classList.remove('active'));
-        dots.forEach(dot => dot.classList.remove('active'));
-        
-        // Update index with wrapping
-        currentIndex = (index + images.length) % images.length;
-        
-        // Show selected image and dot
-        images[currentIndex].classList.add('active');
-        dots[currentIndex].classList.add('active');
-      }
-      
-      function nextSlide() {
-        goToSlide(currentIndex + 1);
-      }
-      
-      function startTimer() {
-        timer = setInterval(nextSlide, interval);
-      }
-      
-      function resetTimer() {
-        clearInterval(timer);
-        startTimer();
-      }
-      
-      // Initialize first slide
-      images[0].classList.add('active');
-      if (dots.length > 0) dots[0].classList.add('active');
-      
-      // Start slideshow
-      startTimer();
-      
-      // Pause on hover
-      container.addEventListener('mouseenter', () => clearInterval(timer));
-      container.addEventListener('mouseleave', startTimer);
-      
-      // Touch support for mobile
-      let touchStartX = 0;
-      container.addEventListener('touchstart', (e) => {
-        touchStartX = e.touches[0].clientX;
-        clearInterval(timer);
-      }, { passive: true });
-      
-      container.addEventListener('touchend', (e) => {
-        const touchEndX = e.changedTouches[0].clientX;
-        if (touchEndX < touchStartX - 50) nextSlide(); // Swipe left
-        if (touchEndX > touchStartX + 50) goToSlide(currentIndex - 1); // Swipe right
-        startTimer();
-      }, { passive: true });
-    });
+  function rotateImages(containerSelector, imageSelector, interval = 2000) {
+    const container = document.querySelector(containerSelector);
+    const images = container.querySelectorAll(imageSelector);
+    let index = 0;
+
+    if (!images.length) return;
+
+    setInterval(() => {
+      images[index].classList.remove('active');
+      index = (index + 1) % images.length;
+      images[index].classList.add('active');
+    }, interval);
   }
-  
-  // Initialize when page loads
+
+  // Run on page load
   document.addEventListener('DOMContentLoaded', () => {
-    initSlideshows();
-    
-    // Update copyright year
-    document.getElementById('current-year').textContent = new Date().getFullYear();
+    rotateImages('.gallery', 'img');
+    rotateImages('.certificates', 'img');
   });
 </script>
 </body>
