@@ -84,7 +84,7 @@ function initTypewriter() {
   if (!terminal) return;
   
   const messages = [
-    "> Welcome to Engr. Umar's portfolio",
+    "> Welcome to Engr. Umar Bello Tafida, CCNA, CISSP",
     "> Loading cybersecurity modules...",
     "> Initializing AI research projects...",
     "> Booting embedded systems...",
