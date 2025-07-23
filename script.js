@@ -117,46 +117,106 @@ function initTypewriter() {
   setTimeout(type, 1000);
 }
 
-// Image Slideshows with 2-second interval
+// Enhanced Image Slideshow Function
 function initImageSlideshows() {
-  const galleries = [
-    { id: 'gallery', interval: 2000 },
-    { id: 'certificates', interval: 2000 }
+  const slideshows = [
+    { container: '.gallery-container', slider: '.gallery', nav: '.gallery-nav', interval: 2000 },
+    { container: '.certificates-container', slider: '.certificates', nav: '.certificates-nav', interval: 2000 }
   ];
-  
-  galleries.forEach(({ id, interval }) => {
-    const container = document.querySelector(`#${id} .gallery`);
-    if (!container) return;
-    
-    const images = Array.from(container.querySelectorAll('img'));
+
+  slideshows.forEach(({ container, slider, nav, interval }) => {
+    const containerEl = document.querySelector(container);
+    if (!containerEl) return;
+
+    const sliderEl = containerEl.querySelector(slider);
+    const images = Array.from(sliderEl.querySelectorAll('img'));
     if (images.length <= 1) return;
-    
-    let current = 0;
+
+    const navEl = containerEl.querySelector(nav);
+    let currentIndex = 0;
     let timer;
-    
-    const showImage = (index) => {
+
+    // Create dots if they don't exist
+    if (images.length > 1 && navEl.children.length === 0) {
+      images.forEach((_, index) => {
+        const dot = document.createElement('button');
+        dot.className = slider.includes('gallery') ? 'gallery-dot' : 'certificates-dot';
+        dot.addEventListener('click', () => {
+          goToSlide(index);
+          resetTimer();
+        });
+        navEl.appendChild(dot);
+      });
+    }
+
+    const dots = Array.from(navEl.children);
+
+    // Initialize first slide
+    images[0].classList.add('active');
+    if (dots.length > 0) dots[0].classList.add('active');
+
+    const goToSlide = (index) => {
+      // Wrap around if at ends
+      if (index >= images.length) index = 0;
+      if (index < 0) index = images.length - 1;
+
+      // Update active classes
       images.forEach(img => img.classList.remove('active'));
       images[index].classList.add('active');
-      current = index;
-      updateDots();
+      
+      if (dots.length > 0) {
+        dots.forEach(dot => dot.classList.remove('active'));
+        dots[index].classList.add('active');
+      }
+
+      currentIndex = index;
     };
-    
-    const nextImage = () => showImage((current + 1) % images.length);
-    
-    // Navigation dots
-    const nav = document.createElement('div');
-    nav.className = 'gallery-nav';
-    
-    images.forEach((_, i) => {
-      const dot = document.createElement('button');
-      dot.className = 'gallery-dot';
-      dot.addEventListener('click', () => {
-        clearInterval(timer);
-        showImage(i);
-        startTimer();
-      });
-      nav.appendChild(dot);
-    });
+
+    const nextSlide = () => goToSlide(currentIndex + 1);
+    const prevSlide = () => goToSlide(currentIndex - 1);
+
+    const startTimer = () => {
+      timer = setInterval(nextSlide, interval);
+    };
+
+    const resetTimer = () => {
+      clearInterval(timer);
+      startTimer();
+    };
+
+    // Start the slideshow
+    startTimer();
+
+    // Pause on hover
+    containerEl.addEventListener('mouseenter', () => clearInterval(timer));
+    containerEl.addEventListener('mouseleave', startTimer);
+
+    // Touch events for mobile
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    containerEl.addEventListener('touchstart', (e) => {
+      touchStartX = e.changedTouches[0].screenX;
+      clearInterval(timer);
+    }, { passive: true });
+
+    containerEl.addEventListener('touchend', (e) => {
+      touchEndX = e.changedTouches[0].screenX;
+      handleSwipe();
+      startTimer();
+    }, { passive: true });
+
+    const handleSwipe = () => {
+      if (touchEndX < touchStartX - 50) nextSlide(); // Swipe left
+      if (touchEndX > touchStartX + 50) prevSlide(); // Swipe right
+    };
+  });
+}
+
+// Initialize when DOM is loaded
+document.addEventListener('DOMContentLoaded', () => {
+  initImageSlideshows();
+});
     
     container.parentNode.insertBefore(nav, container.nextSibling);
     
