@@ -59,101 +59,92 @@ function initMenu() {
   });
 }
 
-// Nigerian Timezone Clock
-function initClock() {
-  const clockElement = document.getElementById('clock');
-  if (!clockElement) return;
-
-  const updateClock = () => {
-    const now = new Date();
-    const options = { 
-      timeZone: 'Africa/Lagos',
-      hour: '2-digit',
-      minute: '2-digit',
-      second: '2-digit',
-      hour12: true,
-      weekday: 'short',
-      month: 'short',
-      day: 'numeric'
-    };
-    
-    clockElement.textContent = now.toLocaleString('en-NG', options);
+// Clock Functionality
+function updateClock() {
+  const now = new Date();
+  const options = { 
+    timeZone: 'Africa/Lagos',
+    hour: '2-digit', 
+    minute: '2-digit',
+    second: '2-digit',
+    hour12: true,
+    weekday: 'short',
+    month: 'short',
+    day: 'numeric'
   };
-
-  updateClock();
-  setInterval(updateClock, 1000);
+  document.getElementById('clock').textContent = now.toLocaleString('en-NG', options);
 }
 
-// Terminal Typewriter Effect
-function initTypewriter() {
-  const terminal = document.getElementById('typewriter');
-  if (!terminal) return;
-  
-  const messages = [
-    "> Welcome to Engr. Umar Bello Tafida, CCNA, CISSP",
-    "> Loading cybersecurity modules...",
-    "> Initializing AI research projects...",
-    "> Booting embedded systems...",
-    "> Systems operational. Ready for commands."
-  ];
-  
-  let i = 0, j = 0, currentMessage = '', isDeleting = false, isPaused = false;
-
-  function type() {
-    if (isPaused) return;
-    
-    currentMessage = messages[i];
-    
-    if (isDeleting) {
-      terminal.innerHTML = `> ${currentMessage.substring(0, j--)}_`;
-      if (j < 0) {
-        isDeleting = false;
-        i = (i + 1) % messages.length;
-        isPaused = true;
-        setTimeout(() => {
-          isPaused = false;
-          type();
-        }, 500);
-      }
-    } else {
-      terminal.innerHTML = `> ${currentMessage.substring(0, j++)}_`;
-      if (j > currentMessage.length) {
-        isDeleting = true;
-        isPaused = true;
-        setTimeout(() => {
-          isPaused = false;
-          type();
-        }, 2000);
-        return;
-      }
-    }
-    
-    const speed = isDeleting ? 50 : Math.random() * 50 + 50;
-    setTimeout(type, speed);
-  }
-  
-  // Start with a delay
-  setTimeout(type, 1000);
-}
-
-// Image Slideshows with Touch Support
-function initImageSlideshows() {
+// Initialize Slideshows
+function initSlideshows() {
   const slideshows = [
-    { container: '.gallery-container', slider: '.gallery-slideshow', nav: '.gallery-nav', interval: 2000 },
-    { container: '.certificates-container', slider: '.certificates-slideshow', nav: '.certificates-nav', interval: 2000 }
+    { container: '.gallery-container', slideshow: '.gallery-slideshow', nav: '.gallery-nav' },
+    { container: '.certificates-container', slideshow: '.certificates-slideshow', nav: '.certificates-nav' }
   ];
 
-  slideshows.forEach(({ container, slider, nav, interval }) => {
+  slideshows.forEach(({container, slideshow, nav}) => {
     const containerEl = document.querySelector(container);
     if (!containerEl) return;
 
-    const sliderEl = containerEl.querySelector(slider);
-    const images = Array.from(sliderEl?.querySelectorAll('img') || []);
-    if (images.length <= 1) return;
+    const slides = containerEl.querySelectorAll(`${slideshow} img`);
+    if (slides.length <= 1) return;
 
     const navEl = containerEl.querySelector(nav);
     let currentIndex = 0;
     let timer;
+
+    // Create navigation dots
+    slides.forEach((_, index) => {
+      const dot = document.createElement('button');
+      dot.className = nav.slice(1); // Remove the dot from class name
+      dot.addEventListener('click', () => {
+        goToSlide(index);
+        resetTimer();
+      });
+      navEl.appendChild(dot);
+    });
+
+    const dots = navEl.querySelectorAll('button');
+
+    function goToSlide(index) {
+      slides.forEach(slide => slide.classList.remove('active'));
+      dots.forEach(dot => dot.classList.remove('active'));
+      
+      currentIndex = (index + slides.length) % slides.length;
+      slides[currentIndex].classList.add('active');
+      dots[currentIndex].classList.add('active');
+    }
+
+    function nextSlide() {
+      goToSlide(currentIndex + 1);
+    }
+
+    function startTimer() {
+      timer = setInterval(nextSlide, 2000); // 2 second interval
+    }
+
+    function resetTimer() {
+      clearInterval(timer);
+      startTimer();
+    }
+
+    // Initialize
+    slides[0].classList.add('active');
+    if (dots.length > 0) dots[0].classList.add('active');
+    startTimer();
+
+    // Pause on hover
+    containerEl.addEventListener('mouseenter', () => clearInterval(timer));
+    containerEl.addEventListener('mouseleave', startTimer);
+  });
+}
+
+// Initialize everything when page loads
+document.addEventListener('DOMContentLoaded', () => {
+  updateClock();
+  setInterval(updateClock, 1000); // Update clock every second
+  initSlideshows();
+});
 
     // Create navigation dots
     if (images.length > 1 && navEl && navEl.children.length === 0) {
