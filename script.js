@@ -3,14 +3,14 @@ document.addEventListener('DOMContentLoaded', () => {
   // Initialize all components
   initDarkMode();
   initMenu();
-  initClock(); // Only one clock now
+  initClock(); // Single clock
   initTypewriter();
-  initImageSlideshows();
+  initImageSlideshows(); // 2-second slideshows
   initCurrentYear();
   initProjectCards();
 });
 
-// Enhanced Dark Mode with Local Storage
+// Dark Mode Toggle
 function initDarkMode() {
   const toggleBtn = document.querySelector('.toggle-btn');
   const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
@@ -30,7 +30,7 @@ function initDarkMode() {
   });
 }
 
-// Improved Menu Toggle with Accessibility
+// Mobile Menu Toggle
 function initMenu() {
   const menuToggle = document.querySelector('.menu-toggle');
   const menu = document.getElementById('menu');
@@ -51,9 +51,9 @@ function initMenu() {
   });
 }
 
-// Single Clock with Nigerian Timezone
+// Single Clock Display
 function initClock() {
-  const formatTimeDate = () => {
+  const updateClock = () => {
     const now = new Date();
     const options = { 
       timeZone: 'Africa/Lagos',
@@ -63,19 +63,17 @@ function initClock() {
       hour12: true,
       weekday: 'short',
       month: 'short',
-      day: 'numeric',
-      year: 'numeric'
+      day: 'numeric'
     };
     
-    const timeDateStr = now.toLocaleString('en-NG', options);
-    document.getElementById('clock').textContent = timeDateStr;
+    document.getElementById('clock').textContent = now.toLocaleString('en-NG', options);
   };
   
-  formatTimeDate();
-  setInterval(formatTimeDate, 1000);
+  updateClock();
+  setInterval(updateClock, 1000);
 }
 
-// Engineering Terminal Typewriter Effect
+// Typewriter Effect
 function initTypewriter() {
   const terminal = document.getElementById('typewriter');
   if (!terminal) return;
@@ -88,11 +86,7 @@ function initTypewriter() {
     "> Systems operational. Ready for commands."
   ];
   
-  let i = 0;
-  let j = 0;
-  let currentMessage = '';
-  let isDeleting = false;
-  let isPaused = false;
+  let i = 0, j = 0, currentMessage = '', isDeleting = false, isPaused = false;
 
   function type() {
     if (isPaused) return;
@@ -105,37 +99,29 @@ function initTypewriter() {
         isDeleting = false;
         i = (i + 1) % messages.length;
         isPaused = true;
-        setTimeout(() => {
-          isPaused = false;
-          type();
-        }, 500);
+        setTimeout(() => { isPaused = false; type(); }, 500);
       }
     } else {
       terminal.innerHTML = `> ${currentMessage.substring(0, j++)}_`;
       if (j > currentMessage.length) {
         isDeleting = true;
         isPaused = true;
-        setTimeout(() => {
-          isPaused = false;
-          type();
-        }, 2000);
+        setTimeout(() => { isPaused = false; type(); }, 2000);
         return;
       }
     }
     
-    const speed = isDeleting ? 50 : Math.random() * 50 + 50;
-    setTimeout(type, speed);
+    setTimeout(type, isDeleting ? 50 : Math.random() * 50 + 50);
   }
   
-  // Start with a delay
   setTimeout(type, 1000);
 }
 
-// Modern Image Gallery with 2-second transitions
+// Image Slideshows with 2-second interval
 function initImageSlideshows() {
   const galleries = [
-    { id: 'gallery', interval: 2000 }, // Changed to 2 seconds
-    { id: 'certificates', interval: 2000 } // Changed to 2 seconds
+    { id: 'gallery', interval: 2000 },
+    { id: 'certificates', interval: 2000 }
   ];
   
   galleries.forEach(({ id, interval }) => {
@@ -149,30 +135,15 @@ function initImageSlideshows() {
     let timer;
     
     const showImage = (index) => {
-      images.forEach((img, i) => {
-        img.style.opacity = '0';
-        img.style.transition = 'opacity 0.5s ease-in-out';
-      });
-      
-      setTimeout(() => {
-        images.forEach((img, i) => {
-          img.style.display = i === index ? 'block' : 'none';
-        });
-        
-        setTimeout(() => {
-          images[index].style.opacity = '1';
-        }, 50);
-      }, 500);
-      
+      images.forEach(img => img.classList.remove('active'));
+      images[index].classList.add('active');
       current = index;
       updateDots();
     };
     
-    const nextImage = () => {
-      showImage((current + 1) % images.length);
-    };
+    const nextImage = () => showImage((current + 1) % images.length);
     
-    // Add navigation controls
+    // Navigation dots
     const nav = document.createElement('div');
     nav.className = 'gallery-nav';
     
@@ -190,10 +161,8 @@ function initImageSlideshows() {
     container.parentNode.insertBefore(nav, container.nextSibling);
     
     const updateDots = () => {
-      const dots = container.parentNode.querySelectorAll('.gallery-dot');
-      dots.forEach((dot, i) => {
-        dot.classList.toggle('active', i === current);
-      });
+      const dots = nav.querySelectorAll('.gallery-dot');
+      dots.forEach((dot, i) => dot.classList.toggle('active', i === current));
     };
     
     const startTimer = () => {
@@ -202,8 +171,7 @@ function initImageSlideshows() {
     };
     
     // Initialize
-    images[0].style.opacity = '1';
-    images[0].style.display = 'block';
+    images[0].classList.add('active');
     startTimer();
     
     // Pause on hover
@@ -212,19 +180,15 @@ function initImageSlideshows() {
   });
 }
 
-// Update copyright year automatically
+// Copyright Year
 function initCurrentYear() {
   const yearElement = document.getElementById('current-year');
-  if (yearElement) {
-    yearElement.textContent = new Date().getFullYear();
-  }
+  if (yearElement) yearElement.textContent = new Date().getFullYear();
 }
 
-// Interactive Project Cards
+// Project Card Hover Effects
 function initProjectCards() {
-  const projectCards = document.querySelectorAll('.project-card');
-  
-  projectCards.forEach(card => {
+  document.querySelectorAll('.project-card').forEach(card => {
     const links = card.querySelector('.project-links');
     if (!links) return;
     
@@ -238,32 +202,26 @@ function initProjectCards() {
       links.style.transform = 'translateY(10px)';
     });
     
-    // Initialize state
     links.style.opacity = '0';
     links.style.transform = 'translateY(10px)';
     links.style.transition = 'all 0.3s ease';
   });
 }
 
-// Enhanced Technical Support Form
-document.getElementById('supportForm').addEventListener('submit', function(e) {
+// Contact Form
+document.getElementById('supportForm')?.addEventListener('submit', function(e) {
   e.preventDefault();
   
   const formData = {
-    email: document.getElementById('email').value,
-    subject: document.getElementById('subject').value,
-    message: document.getElementById('message').value,
+    email: this.email.value,
+    subject: this.subject.value,
+    message: this.message.value,
     timestamp: new Date().toISOString()
   };
   
-  // Simulate form submission
-  console.log('Technical Inquiry:', formData);
+  console.log('Form submission:', formData);
+  alert(`🚀 Message received!\n\nI'll respond to your inquiry within 24 hours.`);
   
-  // Show engineering-themed alert
-  const alertMsg = `🚀 Message received!\n\nI'll respond to your ${formData.subject.replace(/([A-Z])/g, ' $1').trim()} inquiry within 24 hours.`;
-  alert(alertMsg);
-  
-  // Reset form with animation
   this.style.opacity = '0.5';
   setTimeout(() => {
     this.reset();
