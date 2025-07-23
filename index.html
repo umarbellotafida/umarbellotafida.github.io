@@ -320,5 +320,26 @@
   </div>
 </footer>
 <script src="script.js"></script>
+<script>
+  function rotateImages(containerSelector, imageSelector, interval = 2000) {
+    const container = document.querySelector(containerSelector);
+    const images = container.querySelectorAll(imageSelector);
+    let index = 0;
+
+    if (!images.length) return;
+
+    setInterval(() => {
+      images[index].classList.remove('active');
+      index = (index + 1) % images.length;
+      images[index].classList.add('active');
+    }, interval);
+  }
+
+  // Run on page load
+  document.addEventListener('DOMContentLoaded', () => {
+    rotateImages('.gallery', 'img');
+    rotateImages('.certificates', 'img');
+  });
+</script>
 </body>
 </html>
