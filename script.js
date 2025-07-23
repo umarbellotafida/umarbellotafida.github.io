@@ -236,3 +236,23 @@ function initProjectCards() {
     links.style.transition = 'all 0.3s ease';
   });
 }
+
+// Support Form Handling
+document.getElementById('supportForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  
+  const formData = {
+    name: document.getElementById('name').value,
+    email: document.getElementById('email').value,
+    message: document.getElementById('message').value
+  };
+  
+  // Here you would typically send the data to your server
+  console.log('Form submitted:', formData);
+  
+  // Show success message
+  alert('Thank you for your message! I will respond to your technical inquiry soon.');
+  
+  // Reset form
+  this.reset();
+});
