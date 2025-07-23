@@ -466,7 +466,7 @@ section h2::after {
 
 @media (max-width: 480px) {
   .gallery, .certificates {
-    height: 200px; /* Smaller on mobile phones */
+    height: 200px;
   }
   
   .gallery-nav, .certificates-nav {
@@ -478,6 +478,7 @@ section h2::after {
     height: 10px;
   }
 }
+} ← REMOVE THIS LINE
 }
 
 /* Footer */
