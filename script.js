@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Initialize all components
   initDarkMode();
   initMenu();
-  initClock();
+  initClock(); // Only one clock now
   initTypewriter();
   initImageSlideshows();
   initCurrentYear();
@@ -51,7 +51,7 @@ function initMenu() {
   });
 }
 
-// Enhanced Clock with Nigerian Timezone
+// Single Clock with Nigerian Timezone
 function initClock() {
   const formatTimeDate = () => {
     const now = new Date();
@@ -67,11 +67,8 @@ function initClock() {
       year: 'numeric'
     };
     
-    const timeStr = now.toLocaleTimeString('en-NG', options);
-    const dateStr = now.toLocaleDateString('en-NG', options);
-    
-    document.getElementById('clock').textContent = timeStr;
-    document.getElementById('date').textContent = dateStr;
+    const timeDateStr = now.toLocaleString('en-NG', options);
+    document.getElementById('clock').textContent = timeDateStr;
   };
   
   formatTimeDate();
@@ -134,11 +131,11 @@ function initTypewriter() {
   setTimeout(type, 1000);
 }
 
-// Modern Image Gallery with Controls
+// Modern Image Gallery with 2-second transitions
 function initImageSlideshows() {
   const galleries = [
-    { id: 'gallery', interval: 3000 },
-    { id: 'certificates', interval: 4000 }
+    { id: 'gallery', interval: 2000 }, // Changed to 2 seconds
+    { id: 'certificates', interval: 2000 } // Changed to 2 seconds
   ];
   
   galleries.forEach(({ id, interval }) => {
@@ -153,39 +150,44 @@ function initImageSlideshows() {
     
     const showImage = (index) => {
       images.forEach((img, i) => {
-        img.style.display = i === index ? 'block' : 'none';
+        img.style.opacity = '0';
+        img.style.transition = 'opacity 0.5s ease-in-out';
       });
+      
+      setTimeout(() => {
+        images.forEach((img, i) => {
+          img.style.display = i === index ? 'block' : 'none';
+        });
+        
+        setTimeout(() => {
+          images[index].style.opacity = '1';
+        }, 50);
+      }, 500);
+      
       current = index;
+      updateDots();
     };
     
     const nextImage = () => {
       showImage((current + 1) % images.length);
     };
     
-    // Add navigation controls if more than 3 images
-    if (images.length > 3) {
-      const nav = document.createElement('div');
-      nav.className = 'gallery-nav';
-      
-      images.forEach((_, i) => {
-        const dot = document.createElement('button');
-        dot.className = 'gallery-dot';
-        dot.addEventListener('click', () => {
-          clearInterval(timer);
-          showImage(i);
-          startTimer();
-        });
-        nav.appendChild(dot);
-      });
-      
-      container.parentNode.insertBefore(nav, container.nextSibling);
-      updateDots();
-    }
+    // Add navigation controls
+    const nav = document.createElement('div');
+    nav.className = 'gallery-nav';
     
-    const startTimer = () => {
-      clearInterval(timer);
-      timer = setInterval(nextImage, interval);
-    };
+    images.forEach((_, i) => {
+      const dot = document.createElement('button');
+      dot.className = 'gallery-dot';
+      dot.addEventListener('click', () => {
+        clearInterval(timer);
+        showImage(i);
+        startTimer();
+      });
+      nav.appendChild(dot);
+    });
+    
+    container.parentNode.insertBefore(nav, container.nextSibling);
     
     const updateDots = () => {
       const dots = container.parentNode.querySelectorAll('.gallery-dot');
@@ -194,8 +196,14 @@ function initImageSlideshows() {
       });
     };
     
+    const startTimer = () => {
+      clearInterval(timer);
+      timer = setInterval(nextImage, interval);
+    };
+    
     // Initialize
-    showImage(0);
+    images[0].style.opacity = '1';
+    images[0].style.display = 'block';
     startTimer();
     
     // Pause on hover
@@ -248,7 +256,7 @@ document.getElementById('supportForm').addEventListener('submit', function(e) {
     timestamp: new Date().toISOString()
   };
   
-  // Simulate form submission (replace with actual API call)
+  // Simulate form submission
   console.log('Technical Inquiry:', formData);
   
   // Show engineering-themed alert
