@@ -1,27 +1,22 @@
 // Computer Engineering Portfolio JS
 document.addEventListener('DOMContentLoaded', () => {
-  try {
-    initDarkMode();
-    initMenu();
-    initClock();
-    initTypewriter();
-    initImageSlideshows();
-    initCurrentYear();
-    initProjectCards();
-    initContactForm();
-  } catch (error) {
-    console.error('Initialization error:', error);
-  }
+  // Initialize all components
+  initDarkMode();
+  initMenu();
+  initClock();
+  initTypewriter();
+  initImageSlideshows();
+  initCurrentYear();
+  initProjectCards();
+  initSupportForm();
 });
 
-// Dark Mode Toggle with Local Storage
+// Enhanced Dark Mode with Local Storage
 function initDarkMode() {
   const toggleBtn = document.querySelector('.toggle-btn');
-  if (!toggleBtn) return;
-
   const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
   const storedMode = localStorage.getItem('portfolio-theme');
-
+  
   // Set initial mode
   if (storedMode === 'dark' || (!storedMode && prefersDark)) {
     document.body.classList.add('dark-mode');
@@ -36,19 +31,17 @@ function initDarkMode() {
   });
 }
 
-// Mobile Menu Toggle with Accessibility
+// Improved Menu Toggle with Accessibility
 function initMenu() {
   const menuToggle = document.querySelector('.menu-toggle');
   const menu = document.getElementById('menu');
-  if (!menuToggle || !menu) return;
-
-  menuToggle.addEventListener('click', (e) => {
-    e.stopPropagation();
+  
+  menuToggle.addEventListener('click', () => {
     const isExpanded = menu.classList.toggle('show');
     menuToggle.setAttribute('aria-expanded', isExpanded);
     menuToggle.textContent = isExpanded ? '✕' : '☰';
   });
-
+  
   // Close menu when clicking outside
   document.addEventListener('click', (e) => {
     if (!menu.contains(e.target) && e.target !== menuToggle) {
@@ -59,159 +52,168 @@ function initMenu() {
   });
 }
 
-// Clock Functionality
-function updateClock() {
-  const now = new Date();
-  const options = { 
-    timeZone: 'Africa/Lagos',
-    hour: '2-digit', 
-    minute: '2-digit',
-    second: '2-digit',
-    hour12: true,
-    weekday: 'short',
-    month: 'short',
-    day: 'numeric'
-  };
-  document.getElementById('clock').textContent = now.toLocaleString('en-NG', options);
-}
-
-// Initialize Slideshows
-function initSlideshows() {
-  const slideshows = [
-    { container: '.gallery-container', slideshow: '.gallery-slideshow', nav: '.gallery-nav' },
-    { container: '.certificates-container', slideshow: '.certificates-slideshow', nav: '.certificates-nav' }
-  ];
-
-  slideshows.forEach(({container, slideshow, nav}) => {
-    const containerEl = document.querySelector(container);
-    if (!containerEl) return;
-
-    const slides = containerEl.querySelectorAll(`${slideshow} img`);
-    if (slides.length <= 1) return;
-
-    const navEl = containerEl.querySelector(nav);
-    let currentIndex = 0;
-    let timer;
-
-    // Create navigation dots
-    slides.forEach((_, index) => {
-      const dot = document.createElement('button');
-      dot.className = nav.slice(1); // Remove the dot from class name
-      dot.addEventListener('click', () => {
-        goToSlide(index);
-        resetTimer();
-      });
-      navEl.appendChild(dot);
-    });
-
-    const dots = navEl.querySelectorAll('button');
-
-    function goToSlide(index) {
-      slides.forEach(slide => slide.classList.remove('active'));
-      dots.forEach(dot => dot.classList.remove('active'));
-      
-      currentIndex = (index + slides.length) % slides.length;
-      slides[currentIndex].classList.add('active');
-      dots[currentIndex].classList.add('active');
-    }
-
-    function nextSlide() {
-      goToSlide(currentIndex + 1);
-    }
-
-    function startTimer() {
-      timer = setInterval(nextSlide, 2000); // 2 second interval
-    }
-
-    function resetTimer() {
-      clearInterval(timer);
-      startTimer();
-    }
-
-    // Initialize
-    slides[0].classList.add('active');
-    if (dots.length > 0) dots[0].classList.add('active');
-    startTimer();
-
-    // Pause on hover
-    containerEl.addEventListener('mouseenter', () => clearInterval(timer));
-    containerEl.addEventListener('mouseleave', startTimer);
-  });
-}
-
-// Initialize everything when page loads
-document.addEventListener('DOMContentLoaded', () => {
-  updateClock();
-  setInterval(updateClock, 1000); // Update clock every second
-  initSlideshows();
-});
-
-    // Create navigation dots
-    if (images.length > 1 && navEl && navEl.children.length === 0) {
-      images.forEach((_, index) => {
-        const dot = document.createElement('button');
-        dot.className = slider.includes('gallery') ? 'gallery-dot' : 'certificates-dot';
-        dot.addEventListener('click', () => {
-          goToSlide(index);
-          resetTimer();
-        });
-        navEl.appendChild(dot);
-      });
-    }
-
-    const dots = Array.from(navEl?.children || []);
-    
-    const goToSlide = (index) => {
-      // Wrap around if at ends
-      if (index >= images.length) index = 0;
-      if (index < 0) index = images.length - 1;
-
-      // Update active classes
-      images.forEach(img => img.classList.remove('active'));
-      images[index].classList.add('active');
-      
-      if (dots.length > 0) {
-        dots.forEach(dot => dot.classList.remove('active'));
-        dots[index].classList.add('active');
-      }
-
-      currentIndex = index;
+// Single Clock Implementation with Nigerian Timezone
+function initClock() {
+  const formatTimeDate = () => {
+    const now = new Date();
+    const options = { 
+      timeZone: 'Africa/Lagos',
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit',
+      hour12: true,
+      weekday: 'short',
+      month: 'short',
+      day: 'numeric',
+      year: 'numeric'
     };
+    
+    const timeStr = now.toLocaleTimeString('en-NG', options);
+    const dateStr = now.toLocaleDateString('en-NG', options);
+    
+    // Update the clock display in hero section only
+    const clockElement = document.getElementById('clock');
+    if (clockElement) {
+      clockElement.innerHTML = `<i class="fas fa-clock"></i> ${timeStr}`;
+    }
+    
+    const dateElement = document.getElementById('date');
+    if (dateElement) {
+      dateElement.innerHTML = `<i class="fas fa-calendar-alt"></i> ${dateStr}`;
+    }
+  };
+  
+  formatTimeDate();
+  setInterval(formatTimeDate, 1000);
+}
 
-    const nextSlide = () => goToSlide(currentIndex + 1);
+// Engineering Terminal Typewriter Effect
+function initTypewriter() {
+  const terminal = document.getElementById('typewriter');
+  if (!terminal) return;
+  
+  const messages = [
+    "> Welcome to Engr. Umar Bello Tafida, CCNA, CISSP",
+    "> Loading cybersecurity modules...",
+    "> Initializing AI research projects...",
+    "> Booting embedded systems...",
+    "> Systems operational. Ready for commands."
+  ];
+  
+  let i = 0;
+  let j = 0;
+  let currentMessage = '';
+  let isDeleting = false;
+  let isPaused = false;
+
+  function type() {
+    if (isPaused) return;
+    
+    currentMessage = messages[i];
+    
+    if (isDeleting) {
+      terminal.innerHTML = `> ${currentMessage.substring(0, j--)}_`;
+      if (j < 0) {
+        isDeleting = false;
+        i = (i + 1) % messages.length;
+        isPaused = true;
+        setTimeout(() => {
+          isPaused = false;
+          type();
+        }, 500);
+      }
+    } else {
+      terminal.innerHTML = `> ${currentMessage.substring(0, j++)}_`;
+      if (j > currentMessage.length) {
+        isDeleting = true;
+        isPaused = true;
+        setTimeout(() => {
+          isPaused = false;
+          type();
+        }, 2000);
+        return;
+      }
+    }
+    
+    const speed = isDeleting ? 50 : Math.random() * 50 + 50;
+    setTimeout(type, speed);
+  }
+  
+  // Start with a delay
+  setTimeout(type, 1000);
+}
+
+// Modern Image Gallery with Controls
+function initImageSlideshows() {
+  const galleries = [
+    { id: 'gallery', interval: 3000 },
+    { id: 'certificates', interval: 4000 }
+  ];
+  
+  galleries.forEach(({ id, interval }) => {
+    const container = document.querySelector(`#${id} .gallery`);
+    if (!container) return;
+    
+    const images = Array.from(container.querySelectorAll('img'));
+    if (images.length <= 1) return;
+    
+    let current = 0;
+    let timer;
+    
+    const showImage = (index) => {
+      images.forEach((img, i) => {
+        img.style.display = i === index ? 'block' : 'none';
+      });
+      current = index;
+    };
+    
+    const nextImage = () => {
+      showImage((current + 1) % images.length);
+    };
+    
+    // Add navigation controls if more than 3 images
+    if (images.length > 3) {
+      const nav = document.createElement('div');
+      nav.className = 'gallery-nav';
+      
+      images.forEach((_, i) => {
+        const dot = document.createElement('button');
+        dot.className = 'gallery-dot';
+        dot.addEventListener('click', () => {
+          clearInterval(timer);
+          showImage(i);
+          startTimer();
+        });
+        nav.appendChild(dot);
+      });
+      
+      container.parentNode.insertBefore(nav, container.nextSibling);
+      updateDots();
+    }
+    
     const startTimer = () => {
       clearInterval(timer);
-      timer = setInterval(nextSlide, interval);
+      timer = setInterval(nextImage, interval);
     };
-
-    // Initialize first slide
-    goToSlide(0);
+    
+    const updateDots = () => {
+      const dots = container.parentNode.querySelectorAll('.gallery-dot');
+      dots.forEach((dot, i) => {
+        dot.classList.toggle('active', i === current);
+      });
+    };
+    
+    // Initialize
+    showImage(0);
     startTimer();
-
+    
     // Pause on hover
-    containerEl.addEventListener('mouseenter', () => clearInterval(timer));
-    containerEl.addEventListener('mouseleave', startTimer);
-
-    // Touch support for mobile
-    let touchStartX = 0;
-    containerEl.addEventListener('touchstart', (e) => {
-      touchStartX = e.touches[0].clientX;
-      clearInterval(timer);
-    }, { passive: true });
-
-    containerEl.addEventListener('touchend', (e) => {
-      const touchEndX = e.changedTouches[0].clientX;
-      const diff = touchStartX - touchEndX;
-      
-      if (diff > 50) nextSlide(); // Swipe left
-      if (diff < -50) goToSlide(currentIndex - 1); // Swipe right
-      
-      startTimer();
-    }, { passive: true });
+    container.addEventListener('mouseenter', () => clearInterval(timer));
+    container.addEventListener('mouseleave', startTimer);
   });
 }
 
-// Update Copyright Year
+// Update copyright year automatically
 function initCurrentYear() {
   const yearElement = document.getElementById('current-year');
   if (yearElement) {
@@ -219,16 +221,13 @@ function initCurrentYear() {
   }
 }
 
-// Project Card Hover Effects
+// Interactive Project Cards
 function initProjectCards() {
-  document.querySelectorAll('.project-card').forEach(card => {
+  const projectCards = document.querySelectorAll('.project-card');
+  
+  projectCards.forEach(card => {
     const links = card.querySelector('.project-links');
     if (!links) return;
-    
-    // Initialize state
-    links.style.opacity = '0';
-    links.style.transform = 'translateY(10px)';
-    links.style.transition = 'all 0.3s ease';
     
     card.addEventListener('mouseenter', () => {
       links.style.opacity = '1';
@@ -239,32 +238,34 @@ function initProjectCards() {
       links.style.opacity = '0';
       links.style.transform = 'translateY(10px)';
     });
+    
+    // Initialize state
+    links.style.opacity = '0';
+    links.style.transform = 'translateY(10px)';
+    links.style.transition = 'all 0.3s ease';
   });
 }
 
-// Contact Form Handling
-function initContactForm() {
+// Support Form Handling
+function initSupportForm() {
   const form = document.getElementById('supportForm');
   if (!form) return;
-
+  
   form.addEventListener('submit', function(e) {
     e.preventDefault();
     
     const formData = {
-      email: this.email.value,
-      subject: this.subject.value,
-      message: this.message.value,
+      email: document.getElementById('email').value,
+      subject: document.getElementById('subject').value,
+      message: document.getElementById('message').value,
       timestamp: new Date().toISOString()
     };
     
-    // Simulate form submission
     console.log('Technical Inquiry:', formData);
     
-    // Show engineering-themed alert
     const alertMsg = `🚀 Message received!\n\nI'll respond to your ${formData.subject.replace(/([A-Z])/g, ' $1').trim()} inquiry within 24 hours.`;
     alert(alertMsg);
     
-    // Reset form with animation
     this.style.opacity = '0.5';
     setTimeout(() => {
       this.reset();
