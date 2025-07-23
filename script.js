@@ -1,167 +1,283 @@
 // Computer Engineering Portfolio JS
-
-document.addEventListener('DOMContentLoaded', () => { initDarkMode(); initMenu(); initClock(); initTypewriter(); initImageSlideshows(); initCurrentYear(); initProjectCards(); });
-
-function initDarkMode() { const toggleBtn = document.querySelector('.toggle-btn'); const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches; const storedMode = localStorage.getItem('portfolio-theme');
-
-if (storedMode === 'dark' || (!storedMode && prefersDark)) { document.body.classList.add('dark-mode'); toggleBtn.textContent = 'Light Mode'; }
-
-toggleBtn.addEventListener('click', () => { document.body.classList.toggle('dark-mode'); const isDark = document.body.classList.contains('dark-mode'); toggleBtn.textContent = isDark ? 'Light Mode' : 'Terminal Mode'; localStorage.setItem('portfolio-theme', isDark ? 'dark' : 'light'); }); }
-
-function initMenu() { const menuToggle = document.querySelector('.menu-toggle'); const menu = document.getElementById('menu');
-
-menuToggle.addEventListener('click', () => { const isExpanded = menu.classList.toggle('show'); menuToggle.setAttribute('aria-expanded', isExpanded); menuToggle.textContent = isExpanded ? '✕' : '☰'; });
-
-document.addEventListener('click', (e) => { if (!menu.contains(e.target) && e.target !== menuToggle) { menu.classList.remove('show'); menuToggle.setAttribute('aria-expanded', 'false'); menuToggle.textContent = '☰'; } }); }
-
-function initClock() { const updateClock = () => { const now = new Date(); const options = { timeZone: 'Africa/Lagos', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true, weekday: 'short', month: 'short', day: 'numeric' };
-
-document.getElementById('clock').textContent = now.toLocaleString('en-NG', options);
-
-};
-
-updateClock(); setInterval(updateClock, 1000); }
-
-function initTypewriter() { const terminal = document.getElementById('typewriter'); if (!terminal) return;
-
-const messages = [ "> Welcome to Engr. Umar Bello Tafida, CCNA, CISSP", "> Loading cybersecurity modules...", "> Initializing AI research projects...", "> Booting embedded systems...", "> Systems operational. Ready for commands." ];
-
-let i = 0, j = 0, currentMessage = '', isDeleting = false, isPaused = false;
-
-function type() { if (isPaused) return;
-
-currentMessage = messages[i];
-
-if (isDeleting) {
-  terminal.innerHTML = `> ${currentMessage.substring(0, j--)}_`;
-  if (j < 0) {
-    isDeleting = false;
-    i = (i + 1) % messages.length;
-    isPaused = true;
-    setTimeout(() => { isPaused = false; type(); }, 500);
+document.addEventListener('DOMContentLoaded', () => {
+  try {
+    initDarkMode();
+    initMenu();
+    initClock();
+    initTypewriter();
+    initImageSlideshows();
+    initCurrentYear();
+    initProjectCards();
+    initContactForm();
+  } catch (error) {
+    console.error('Initialization error:', error);
   }
-} else {
-  terminal.innerHTML = `> ${currentMessage.substring(0, j++)}_`;
-  if (j > currentMessage.length) {
-    isDeleting = true;
-    isPaused = true;
-    setTimeout(() => { isPaused = false; type(); }, 2000);
-    return;
+});
+
+// Dark Mode Toggle with Local Storage
+function initDarkMode() {
+  const toggleBtn = document.querySelector('.toggle-btn');
+  if (!toggleBtn) return;
+
+  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  const storedMode = localStorage.getItem('portfolio-theme');
+
+  // Set initial mode
+  if (storedMode === 'dark' || (!storedMode && prefersDark)) {
+    document.body.classList.add('dark-mode');
+    toggleBtn.textContent = 'Light Mode';
   }
-}
 
-setTimeout(type, isDeleting ? 50 : Math.random() * 50 + 50);
-
-}
-
-setTimeout(type, 1000); }
-
-function initImageSlideshows() { const slideshows = [ { container: '.gallery-container', slider: '.gallery', nav: '.gallery-nav', interval: 2000 }, { container: '.certificates-container', slider: '.certificates', nav: '.certificates-nav', interval: 2000 } ];
-
-slideshows.forEach(({ container, slider, nav, interval }) => { const containerEl = document.querySelector(container); if (!containerEl) return;
-
-const sliderEl = containerEl.querySelector(slider);
-const images = Array.from(sliderEl.querySelectorAll('img'));
-if (images.length <= 1) return;
-
-const navEl = containerEl.querySelector(nav);
-let currentIndex = 0;
-let timer;
-
-if (images.length > 1 && navEl.children.length === 0) {
-  images.forEach((_, index) => {
-    const dot = document.createElement('button');
-    dot.className = slider.includes('gallery') ? 'gallery-dot' : 'certificates-dot';
-    dot.addEventListener('click', () => {
-      goToSlide(index);
-      resetTimer();
-    });
-    navEl.appendChild(dot);
+  toggleBtn.addEventListener('click', () => {
+    document.body.classList.toggle('dark-mode');
+    const isDark = document.body.classList.contains('dark-mode');
+    toggleBtn.textContent = isDark ? 'Light Mode' : 'Terminal Mode';
+    localStorage.setItem('portfolio-theme', isDark ? 'dark' : 'light');
   });
 }
 
-const dots = Array.from(navEl.children);
-images[0].classList.add('active');
-if (dots.length > 0) dots[0].classList.add('active');
+// Mobile Menu Toggle with Accessibility
+function initMenu() {
+  const menuToggle = document.querySelector('.menu-toggle');
+  const menu = document.getElementById('menu');
+  if (!menuToggle || !menu) return;
 
-const goToSlide = (index) => {
-  if (index >= images.length) index = 0;
-  if (index < 0) index = images.length - 1;
+  menuToggle.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const isExpanded = menu.classList.toggle('show');
+    menuToggle.setAttribute('aria-expanded', isExpanded);
+    menuToggle.textContent = isExpanded ? '✕' : '☰';
+  });
 
-  images.forEach(img => img.classList.remove('active'));
-  images[index].classList.add('active');
+  // Close menu when clicking outside
+  document.addEventListener('click', (e) => {
+    if (!menu.contains(e.target) && e.target !== menuToggle) {
+      menu.classList.remove('show');
+      menuToggle.setAttribute('aria-expanded', 'false');
+      menuToggle.textContent = '☰';
+    }
+  });
+}
 
-  if (dots.length > 0) {
-    dots.forEach(dot => dot.classList.remove('active'));
-    dots[index].classList.add('active');
+// Nigerian Timezone Clock
+function initClock() {
+  const clockElement = document.getElementById('clock');
+  if (!clockElement) return;
+
+  const updateClock = () => {
+    const now = new Date();
+    const options = { 
+      timeZone: 'Africa/Lagos',
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit',
+      hour12: true,
+      weekday: 'short',
+      month: 'short',
+      day: 'numeric'
+    };
+    
+    clockElement.textContent = now.toLocaleString('en-NG', options);
+  };
+
+  updateClock();
+  setInterval(updateClock, 1000);
+}
+
+// Terminal Typewriter Effect
+function initTypewriter() {
+  const terminal = document.getElementById('typewriter');
+  if (!terminal) return;
+  
+  const messages = [
+    "> Welcome to Engr. Umar Bello Tafida, CCNA, CISSP",
+    "> Loading cybersecurity modules...",
+    "> Initializing AI research projects...",
+    "> Booting embedded systems...",
+    "> Systems operational. Ready for commands."
+  ];
+  
+  let i = 0, j = 0, currentMessage = '', isDeleting = false, isPaused = false;
+
+  function type() {
+    if (isPaused) return;
+    
+    currentMessage = messages[i];
+    
+    if (isDeleting) {
+      terminal.innerHTML = `> ${currentMessage.substring(0, j--)}_`;
+      if (j < 0) {
+        isDeleting = false;
+        i = (i + 1) % messages.length;
+        isPaused = true;
+        setTimeout(() => {
+          isPaused = false;
+          type();
+        }, 500);
+      }
+    } else {
+      terminal.innerHTML = `> ${currentMessage.substring(0, j++)}_`;
+      if (j > currentMessage.length) {
+        isDeleting = true;
+        isPaused = true;
+        setTimeout(() => {
+          isPaused = false;
+          type();
+        }, 2000);
+        return;
+      }
+    }
+    
+    const speed = isDeleting ? 50 : Math.random() * 50 + 50;
+    setTimeout(type, speed);
   }
+  
+  // Start with a delay
+  setTimeout(type, 1000);
+}
 
-  currentIndex = index;
-};
+// Image Slideshows with Touch Support
+function initImageSlideshows() {
+  const slideshows = [
+    { container: '.gallery-container', slider: '.gallery-slideshow', nav: '.gallery-nav', interval: 2000 },
+    { container: '.certificates-container', slider: '.certificates-slideshow', nav: '.certificates-nav', interval: 2000 }
+  ];
 
-const nextSlide = () => goToSlide(currentIndex + 1);
-const prevSlide = () => goToSlide(currentIndex - 1);
+  slideshows.forEach(({ container, slider, nav, interval }) => {
+    const containerEl = document.querySelector(container);
+    if (!containerEl) return;
 
-const startTimer = () => {
-  timer = setInterval(nextSlide, interval);
-};
+    const sliderEl = containerEl.querySelector(slider);
+    const images = Array.from(sliderEl?.querySelectorAll('img') || []);
+    if (images.length <= 1) return;
 
-const resetTimer = () => {
-  clearInterval(timer);
-  startTimer();
-};
+    const navEl = containerEl.querySelector(nav);
+    let currentIndex = 0;
+    let timer;
 
-startTimer();
+    // Create navigation dots
+    if (images.length > 1 && navEl && navEl.children.length === 0) {
+      images.forEach((_, index) => {
+        const dot = document.createElement('button');
+        dot.className = slider.includes('gallery') ? 'gallery-dot' : 'certificates-dot';
+        dot.addEventListener('click', () => {
+          goToSlide(index);
+          resetTimer();
+        });
+        navEl.appendChild(dot);
+      });
+    }
 
-containerEl.addEventListener('mouseenter', () => clearInterval(timer));
-containerEl.addEventListener('mouseleave', startTimer);
+    const dots = Array.from(navEl?.children || []);
+    
+    const goToSlide = (index) => {
+      // Wrap around if at ends
+      if (index >= images.length) index = 0;
+      if (index < 0) index = images.length - 1;
 
-let touchStartX = 0;
-let touchEndX = 0;
+      // Update active classes
+      images.forEach(img => img.classList.remove('active'));
+      images[index].classList.add('active');
+      
+      if (dots.length > 0) {
+        dots.forEach(dot => dot.classList.remove('active'));
+        dots[index].classList.add('active');
+      }
 
-containerEl.addEventListener('touchstart', (e) => {
-  touchStartX = e.changedTouches[0].screenX;
-  clearInterval(timer);
-}, { passive: true });
+      currentIndex = index;
+    };
 
-containerEl.addEventListener('touchend', (e) => {
-  touchEndX = e.changedTouches[0].screenX;
-  handleSwipe();
-  startTimer();
-}, { passive: true });
+    const nextSlide = () => goToSlide(currentIndex + 1);
+    const startTimer = () => {
+      clearInterval(timer);
+      timer = setInterval(nextSlide, interval);
+    };
 
-const handleSwipe = () => {
-  if (touchEndX < touchStartX - 50) nextSlide();
-  if (touchEndX > touchStartX + 50) prevSlide();
-};
+    // Initialize first slide
+    goToSlide(0);
+    startTimer();
 
-}); }
+    // Pause on hover
+    containerEl.addEventListener('mouseenter', () => clearInterval(timer));
+    containerEl.addEventListener('mouseleave', startTimer);
 
-function initCurrentYear() { const yearElement = document.getElementById('current-year'); if (yearElement) yearElement.textContent = new Date().getFullYear(); }
+    // Touch support for mobile
+    let touchStartX = 0;
+    containerEl.addEventListener('touchstart', (e) => {
+      touchStartX = e.touches[0].clientX;
+      clearInterval(timer);
+    }, { passive: true });
 
-function initProjectCards() { document.querySelectorAll('.project-card').forEach(card => { const links = card.querySelector('.project-links'); if (!links) return;
+    containerEl.addEventListener('touchend', (e) => {
+      const touchEndX = e.changedTouches[0].clientX;
+      const diff = touchStartX - touchEndX;
+      
+      if (diff > 50) nextSlide(); // Swipe left
+      if (diff < -50) goToSlide(currentIndex - 1); // Swipe right
+      
+      startTimer();
+    }, { passive: true });
+  });
+}
 
-card.addEventListener('mouseenter', () => {
-  links.style.opacity = '1';
-  links.style.transform = 'translateY(0)';
-});
+// Update Copyright Year
+function initCurrentYear() {
+  const yearElement = document.getElementById('current-year');
+  if (yearElement) {
+    yearElement.textContent = new Date().getFullYear();
+  }
+}
 
-card.addEventListener('mouseleave', () => {
-  links.style.opacity = '0';
-  links.style.transform = 'translateY(10px)';
-});
+// Project Card Hover Effects
+function initProjectCards() {
+  document.querySelectorAll('.project-card').forEach(card => {
+    const links = card.querySelector('.project-links');
+    if (!links) return;
+    
+    // Initialize state
+    links.style.opacity = '0';
+    links.style.transform = 'translateY(10px)';
+    links.style.transition = 'all 0.3s ease';
+    
+    card.addEventListener('mouseenter', () => {
+      links.style.opacity = '1';
+      links.style.transform = 'translateY(0)';
+    });
+    
+    card.addEventListener('mouseleave', () => {
+      links.style.opacity = '0';
+      links.style.transform = 'translateY(10px)';
+    });
+  });
+}
 
-links.style.opacity = '0';
-links.style.transform = 'translateY(10px)';
-links.style.transition = 'all 0.3s ease';
+// Contact Form Handling
+function initContactForm() {
+  const form = document.getElementById('supportForm');
+  if (!form) return;
 
-}); }
-
-document.getElementById('supportForm')?.addEventListener('submit', function(e) { e.preventDefault();
-
-const formData = { email: this.email.value, subject: this.subject.value, message: this.message.value, timestamp: new Date().toISOString() };
-
-console.log('Form submission:', formData); alert(🚀 Message received!\n\nI'll respond to your inquiry within 24 hours.);
-
-this.style.opacity = '0.5'; setTimeout(() => { this.reset(); this.style.opacity = '1'; }, 500); });
-
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    const formData = {
+      email: this.email.value,
+      subject: this.subject.value,
+      message: this.message.value,
+      timestamp: new Date().toISOString()
+    };
+    
+    // Simulate form submission
+    console.log('Technical Inquiry:', formData);
+    
+    // Show engineering-themed alert
+    const alertMsg = `🚀 Message received!\n\nI'll respond to your ${formData.subject.replace(/([A-Z])/g, ' $1').trim()} inquiry within 24 hours.`;
+    alert(alertMsg);
+    
+    // Reset form with animation
+    this.style.opacity = '0.5';
+    setTimeout(() => {
+      this.reset();
+      this.style.opacity = '1';
+    }, 500);
+  });
+}
