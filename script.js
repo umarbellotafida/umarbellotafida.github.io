@@ -237,22 +237,28 @@ function initProjectCards() {
   });
 }
 
-// Support Form Handling
+// Enhanced Technical Support Form
 document.getElementById('supportForm').addEventListener('submit', function(e) {
   e.preventDefault();
   
   const formData = {
-    name: document.getElementById('name').value,
     email: document.getElementById('email').value,
-    message: document.getElementById('message').value
+    subject: document.getElementById('subject').value,
+    message: document.getElementById('message').value,
+    timestamp: new Date().toISOString()
   };
   
-  // Here you would typically send the data to your server
-  console.log('Form submitted:', formData);
+  // Simulate form submission (replace with actual API call)
+  console.log('Technical Inquiry:', formData);
   
-  // Show success message
-  alert('Thank you for your message! I will respond to your technical inquiry soon.');
+  // Show engineering-themed alert
+  const alertMsg = `🚀 Message received!\n\nI'll respond to your ${formData.subject.replace(/([A-Z])/g, ' $1').trim()} inquiry within 24 hours.`;
+  alert(alertMsg);
   
-  // Reset form
-  this.reset();
+  // Reset form with animation
+  this.style.opacity = '0.5';
+  setTimeout(() => {
+    this.reset();
+    this.style.opacity = '1';
+  }, 500);
 });
