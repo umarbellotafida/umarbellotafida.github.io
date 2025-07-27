@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -30,6 +31,7 @@
       <h1>Assalaamu Alaikum!</h1>
       <div id="time-date-hero">
         <div id="clock">Loading time...</div>
+        <div id="date">Loading date...</div>
       </div>
       <h2 class="my-name">I'm Engr. Umar Bello Tafida, CISSP</h2>
       <p class="title">Computer Systems Engineer | Cybersecurity Specialist | AI Researcher</p>
@@ -240,10 +242,11 @@
     </div>
   </div>
 </section>
+
 <section id="gallery">
   <h2>Technical Gallery</h2>
-  <div class="gallery-slideshow">
-    <div class="gallery-item active">
+  <div class="gallery-grid">
+    <div class="gallery-item">
       <img src="https://umarbellotafida.github.io/office%20national%20forws.webp" alt="FORWS Leadership">
       <p>Presenting technical education proposal</p>
     </div>
@@ -261,84 +264,24 @@
     </div>
   </div>
 </section>
-
 </main>
 
 <footer>
   <div class="contact-engineering">
-    <h3><i class="fas fa-headset"></i> Technical Support</h3>
-    <p>For cybersecurity consultations, AI projects, or engineering collaborations:</p>
-    
-    <form class="support-form" id="supportForm">
-      <div class="form-group">
-        <label for="email"><i class="fas fa-envelope"></i> Email:</label>
-        <input type="email" id="email" name="email" placeholder="your@email.com" required>
-      </div>
-      
-      <div class="form-group">
-        <label for="subject"><i class="fas fa-tag"></i> Subject:</label>
-        <select id="subject" name="subject" required>
-          <option value="" disabled selected>Select inquiry type</option>
-          <option value="cybersecurity">Cybersecurity Consultation</option>
-          <option value="ai">AI/ML Project</option>
-          <option value="embedded">Embedded Systems</option>
-          <option value="collab">Technical Collaboration</option>
-          <option value="other">Other Inquiry</option>
-        </select>
-      </div>
-      
-      <div class="form-group">
-        <label for="message"><i class="fas fa-comment-alt"></i> Message:</label>
-        <textarea id="message" name="message" placeholder="Describe your technical requirements in detail..." rows="5" required></textarea>
-      </div>
-      
-      <button type="submit" class="submit-btn">
-        <i class="fas fa-paper-plane"></i> Send Message
-      </button>
-    </form>
-
-    <div class="social-links">
-      <!-- Your social media links remain unchanged -->
-      <a href="https://github.com/umarbellotafida" target="_blank" class="github" title="GitHub">
-        <i class="fab fa-github"></i>
-      </a>
-      <a href="https://linkedin.com/in/umarbellotafida" target="_blank" class="linkedin" title="LinkedIn">
-        <i class="fab fa-linkedin"></i>
-      </a>
-      <!-- Other social links -->
-     <div class="social-links">
-    <a href="https://facebook.com/umarbellotafida" target="_blank">Facebook</a>
-    <a href="https://github.com/umarbellotafida" target="_blank">GitHub</a>
-    <a href="https://twitter.com/umarbellotafida" target="_blank">Twitter</a>
-    <a href="https://tiktok.com/@umarbellotafida" target="_blank">TikTok</a>
-    <a href="https://youtube.com/@umarbellotafida" target="_blank">YouTube</a>
+    <h3>Engineering Contact</h3>
+    <p>For technical collaborations, research opportunities, or security consultations:</p>
+    <div class="contact-methods">
+      <a href="mailto:engineering@yourdomain.com" class="email">engineering@yourdomain.com</a>
+      <a href="https://github.com/umarbellotafida" target="_blank" class="github">GitHub</a>
+      <a href="https://linkedin.com/in/yourprofile" target="_blank" class="linkedin">LinkedIn</a>
+    </div>
   </div>
   
   <div class="footer-copyright">
-    © <span id="current-year">2025</span> Engr. Umar Bello Tafida, CCNA, CISSP
+    © <span id="current-year">2025</span> Engr. Umar Bello Tafida, CISSP | Computer Engineering Portfolio
   </div>
 </footer>
+
 <script src="script.js"></script>
-<script>
-  function rotateImages(containerSelector, imageSelector, interval = 2000) {
-    const container = document.querySelector(containerSelector);
-    const images = container.querySelectorAll(imageSelector);
-    let index = 0;
-
-    if (!images.length) return;
-
-    setInterval(() => {
-      images[index].classList.remove('active');
-      index = (index + 1) % images.length;
-      images[index].classList.add('active');
-    }, interval);
-  }
-
-  // Run on page load
-  document.addEventListener('DOMContentLoaded', () => {
-    rotateImages('.gallery', 'img');
-    rotateImages('.certificates', 'img');
-  });
-</script>
 </body>
 </html>
