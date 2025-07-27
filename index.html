@@ -4,282 +4,133 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Engr. Umar Bello Tafida | Computer Engineer</title>
+<title>Umar Bello Tafida</title>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <header>
-  <div class="logo">Engr. Umar Bello Tafida, CISSP</div>
+  <div class="logo">Umar Bello Tafida</div>
   <button class="menu-toggle" onclick="toggleMenu()">☰</button>
   <nav id="menu">
-    <a href="#expertise">Expertise</a>
-    <a href="#projects">Projects</a>
-    <a href="#cybersecurity">Cybersecurity</a>
-    <a href="#research">Research</a>
-    <a href="#education">Education</a>
-    <a href="#achievements">Achievements</a>
-    <button class="toggle-btn" onclick="toggleDarkMode()">Terminal Mode</button>
+    <a href="#about">About</a>
+    <a href="#skills">Skills</a>
+    <a href="#leadership">Leadership</a>
+    <a href="#vision">Vision</a>
+    <a href="#gallery">Gallery</a>
+    <a href="#certificates">Certificates</a>
+    <button class="toggle-btn" onclick="toggleDarkMode()">Dark Mode</button>
   </nav>
 </header>
 
 <main>
 <section class="hero">
-  <div class="hero-content">
-    <img src="https://umarbellotafida.github.io/profile.webp" alt="Profile Photo" class="profile-photo">
-    <div class="hero-text">
-      <h1>Assalaamu Alaikum!</h1>
-      <div id="time-date-hero">
-        <div id="clock">Loading time...</div>
-        <div id="date">Loading date...</div>
-      </div>
-      <h2 class="my-name">I'm Engr. Umar Bello Tafida, CISSP</h2>
-      <p class="title">Computer Systems Engineer | Cybersecurity Specialist | AI Researcher</p>
-      <div class="terminal-window">
-        <div class="terminal-header">
-          <span class="terminal-button red"></span>
-          <span class="terminal-button yellow"></span>
-          <span class="terminal-button green"></span>
-          <span class="terminal-title">terminal ~/portfolio</span>
-        </div>
-        <div class="terminal-body" id="typewriter">
-          <span>> Initializing systems...</span>
-        </div>
-      </div>
-    </div>
+  <img src="https://umarbellotafida.github.io/profile.webp" alt="Profile Photo" class="profile-photo">
+  <h1>Assalaamu Alaikum!</h1>
+  <div id="time-date-hero">
+    <div id="clock">Loading time...</div>
+    <div id="date">Loading date...</div>
   </div>
+  <h2 class="my-name">I’m Umar Bello Tafida, CISSP</h2>
+  <p>I’m a Muslim from Rabah, Sokoto State, Nigeriapassionate about technology, leadership, and building digital tools to help my community.  
+  With over 3 years’ experience in web development (HTML, CSS & JavaScript), my dream is to turn ideas into solutions that truly help people.</p>
 </section>
 
-<section id="expertise">
-  <h2>Technical Expertise</h2>
-  
-  <div class="expertise-grid">
-    <div class="expertise-card">
-      <div class="expertise-icon">🖥️</div>
-      <h3>Computer Systems Engineering</h3>
-      <ul>
-        <li>Computer Architecture Design</li>
-        <li>Embedded Systems Development</li>
-        <li>Network Systems Integration</li>
-        <li>FPGA Programming</li>
-      </ul>
-    </div>
-    
-    <div class="expertise-card">
-      <div class="expertise-icon">🔒</div>
-      <h3>Cybersecurity</h3>
-      <ul>
-        <li>Information Security Management</li>
-        <li>Network Security Architecture</li>
-        <li>Penetration Testing</li>
-        <li>Cryptographic Systems</li>
-      </ul>
-    </div>
-    
-    <div class="expertise-card">
-      <div class="expertise-icon">🤖</div>
-      <h3>Artificial Intelligence</h3>
-      <ul>
-        <li>Machine Learning Systems</li>
-        <li>Computer Vision Applications</li>
-        <li>Natural Language Processing</li>
-        <li>Neural Network Optimization</li>
-      </ul>
-    </div>
-  </div>
+<section id="about">
+  <h2>About Me</h2>
+  <p>
+    My name is Umar Bello Tafida. I’m from Rabah, Sokoto State, Nigeria — and beyond the titles or certificates, I see myself first as someone deeply curious about technology and how it can help people around me.
+  </p>
+  <p>
+    From a young age, I’ve always been the person asking “how does this work?” whether it was fixing small electronics, exploring the internet, or writing my first lines of HTML. Over time, that curiosity grew into purpose: to build tools that bring real value to everyday life.
+  </p>
+  <p>
+    I co-founded <strong>Rabah Technician</strong> to bring digital payment services to rural communities, and although we faced challenges, it taught me resilience and the importance of understanding what people truly need. Now, I’m working on creating my own chat platform, aiming to keep people connected in a simpler, more personal way.
+  </p>
+  <blockquote>
+    “Every failure teaches me something. Every mistake is a lesson that gives me experience and encourages me to create something new.”
+  </blockquote>
 </section>
 
-<section id="projects">
-  <h2>Engineering Projects</h2>
-  
-  <div class="project-cards">
-    <div class="project-card">
-      <h3>Rabah Technician Platform</h3>
-      <p class="tech-stack">Tech: Node.js, MongoDB, React, OAuth 2.0</p>
-      <p>Secure digital payment gateway for rural communities with multi-factor authentication and fraud detection systems</p>
-      <div class="project-links">
-        <a href="#" class="code-link">View Code</a>
-        <a href="#" class="demo-link">Case Study</a>
-      </div>
-    </div>
-    
-    <div class="project-card">
-      <h3>Secure Chat Platform</h3>
-      <p class="tech-stack">Tech: WebSockets, AES-256 Encryption, React Native</p>
-      <p>End-to-end encrypted messaging platform with forward secrecy and secure key exchange protocol</p>
-      <div class="project-links">
-        <a href="#" class="code-link">View Code</a>
-        <a href="#" class="demo-link">White Paper</a>
-      </div>
-    </div>
-    
-    <div class="project-card">
-      <h3>IoT Agricultural Monitoring</h3>
-      <p class="tech-stack">Tech: Raspberry Pi, LoRaWAN, TensorFlow Lite</p>
-      <p>Edge computing solution for crop monitoring with predictive analytics for small-scale farmers</p>
-      <div class="project-links">
-        <a href="#" class="code-link">View Schematics</a>
-        <a href="#" class="demo-link">Field Results</a>
-      </div>
-    </div>
-  </div>
+<section id="skills">
+  <h2>Technical & Educational Background</h2>
+  <p>
+    My journey into technology started with curiosity and a simple desire to make things work better. After completing my National Diploma in Computer Science, I didn’t stop there. 
+  </p>
+  <p>
+    I’ve gained over three years of hands-on experience in web development (HTML, CSS, and JavaScript), completed training in Cisco Networking & Cybersecurity, and explored online courses in programming and software development. 
+  </p>
+  <p>
+    In 2019, I proudly completed my Diploma in Certified Information Security System Professional on Alison, achieving an A grade — a milestone that strengthened my passion for keeping digital systems secure.
+  </p>
+  <p>
+    Currently, I’m continuing my studies in Information Technology at Sokoto State University, driven by the belief that learning never truly stops.
+  </p>
 </section>
 
-<section id="cybersecurity">
-  <h2>Cybersecurity Specialization</h2>
-  
-  <div class="cyber-grid">
-    <div class="certification-card">
-      <img src="https://umarbellotafida.github.io/cisco.webp" alt="Cisco Certification">
-      <h3>Cisco Certified Network Associate</h3>
-      <p>Specialized in network security and infrastructure protection</p>
-      <div class="cert-date">2020</div>
-    </div>
-    
-    <div class="certification-card">
-      <img src="https://umarbellotafida.github.io/cybersecurity.webp" alt="Cybersecurity Certification">
-      <h3>CISSP Certification</h3>
-      <p>Certified Information Systems Security Professional</p>
-      <div class="cert-date">2019</div>
-    </div>
-  </div>
-  
-  <div class="security-skills">
-    <h3>Security Competencies:</h3>
-    <div class="skill-tags">
-      <span class="skill-tag">Penetration Testing</span>
-      <span class="skill-tag">Cryptography</span>
-      <span class="skill-tag">Security Architecture</span>
-      <span class="skill-tag">Incident Response</span>
-      <span class="skill-tag">Threat Modeling</span>
-      <span class="skill-tag">PKI Systems</span>
-    </div>
-  </div>
-  
-  <div class="security-methodology">
-    <h3>Security Methodology:</h3>
-    <ol>
-      <li>Defense in Depth approach to system security</li>
-      <li>Zero Trust architecture implementation</li>
-      <li>Continuous vulnerability assessment</li>
-      <li>Secure development lifecycle integration</li>
-    </ol>
-  </div>
+<section id="leadership">
+  <h2>Leadership Experience</h2>
+  <p>
+    Beyond coding and tech, I’ve had the privilege of serving and representing others. As Financial Secretary of the Student Union Government, I learned the importance of transparency and planning. Later, as President of the Rabah Local Government Students Association and Speaker of the Students Representative Assembly (SRA), I developed skills in negotiation, public speaking, and bringing people together.
+  </p>
+  <p>
+    My journey continued as National President of the Federation of Rabah Youth Students (FORWS) and Public Relations Officer of the National All Comrade Congress (Northwest). Each role taught me that leadership isn’t just about titles — it’s about listening, adapting, and working to make a difference.
+  </p>
 </section>
 
-<section id="research">
-  <h2>Technical Research</h2>
-  
-  <div class="research-papers">
-    <div class="paper">
-      <h3>Optimizing Neural Networks for Edge Devices</h3>
-      <p class="paper-meta">Field: AI Engineering | Date: 2023</p>
-      <p>Research on quantization techniques for deploying CNN models on ARM Cortex-M series processors with limited computational resources</p>
-      <a href="#" class="read-paper">Read Abstract</a>
-    </div>
-    
-    <div class="paper">
-      <h3>Blockchain-Based Identity for Rural Communities</h3>
-      <p class="paper-meta">Field: Cybersecurity | Date: 2022</p>
-      <p>Decentralized identity solution using Hyperledger Fabric for populations with limited government documentation</p>
-      <a href="#" class="read-paper">Read Abstract</a>
-    </div>
-  </div>
-</section>
-
-<section id="education">
-  <h2>Education & Continuous Learning</h2>
-  
-  <div class="education-timeline">
-    <div class="education-item">
-      <h3>Sokoto State University</h3>
-      <p class="degree">BSc Information Technology (In Progress)</p>
-      <p class="courses">Relevant Courses: Computer Architecture, Network Security, Data Structures, Cryptography</p>
-    </div>
-    
-    <div class="education-item">
-      <h3>Alison Online</h3>
-      <p class="degree">Diploma in Certified Information Security System Professional</p>
-      <p class="grade">Grade: A (2019)</p>
-    </div>
-    
-    <div class="education-item">
-      <h3>National Diploma in Computer Science</h3>
-      <p class="courses">Key Studies: Computer Hardware, Programming, Database Systems</p>
-    </div>
-  </div>
-  
-  <div class="ongoing-learning">
-    <h3>Current Focus Areas:</h3>
-    <ul>
-      <li>Advanced Cryptography (Self-study via MIT OpenCourseWare)</li>
-      <li>Embedded Systems Security (Online Certification)</li>
-      <li>AI Safety and Ethics (Research Papers)</li>
-    </ul>
-  </div>
-</section>
-
-<section id="achievements">
-  <h2>Achievements & Leadership</h2>
-  
-  <div class="achievement-cards">
-    <div class="achievement-card">
-      <h3>National President</h3>
-      <p class="org">Federation of Rabah Youth Students (FORWS)</p>
-      <p>Led technical initiatives to promote STEM education in rural communities</p>
-    </div>
-    
-    <div class="achievement-card">
-      <h3>Speaker of the Assembly</h3>
-      <p class="org">Students Representative Assembly (SRA)</p>
-      <p>Advocated for improved computer lab facilities and IT curriculum enhancements</p>
-    </div>
-    
-    <div class="achievement-card">
-      <h3>Tech Mentor</h3>
-      <p class="org">Rabah Community Coding Initiative</p>
-      <p>Volunteer teaching programming and cybersecurity basics to local youth</p>
-    </div>
-  </div>
+<section id="vision">
+  <h2>My Vision</h2>
+  <p>
+    I believe technology isn’t just about code or machines — it’s about people. My dream is to help my community, and Africa as a whole, embrace the new era of AI and AGI so that nobody is left behind.
+  </p>
+  <p>
+    I want to see young people in rural areas discovering that they can do big things, farmers using digital tools to boost their harvests, and local businesses growing with simple software that speaks their language and fits their reality.
+  </p>
+  <p>
+    Step by step, project by project, my goal is to turn ideas into practical tools that truly improve lives — not just in cities, but everywhere.
+  </p>
 </section>
 
 <section id="gallery">
-  <h2>Technical Gallery</h2>
-  <div class="gallery-grid">
-    <div class="gallery-item">
-      <img src="https://umarbellotafida.github.io/office%20national%20forws.webp" alt="FORWS Leadership">
-      <p>Presenting technical education proposal</p>
-    </div>
-    <div class="gallery-item">
-      <img src="https://umarbellotafida.github.io/cisco.webp" alt="Cisco Certification">
-      <p>Cisco Networking Certification</p>
-    </div>
-    <div class="gallery-item">
-      <img src="https://umarbellotafida.github.io/cybersecurity.webp" alt="Cybersecurity Certification">
-      <p>Cybersecurity Achievement</p>
-    </div>
-    <div class="gallery-item">
-      <img src="https://umarbellotafida.github.io/profile.webp" alt="Professional Profile">
-      <p>Computer Engineer Profile</p>
-    </div>
+  <h2>My Photo Gallery</h2>
+  <div class="gallery">
+    <img src="https://umarbellotafida.github.io/office%20national%20forws.webp" alt="Office">
+  <img src="https://umarbellotafida.github.io/Official.jpg" alt="SUG Official">
+  <img src="https://umarbellotafida.github.io/sug exco.jpg" alt="sug exco">
+  <img src="https://umarbellotafida.github.io/sug.jpg" alt="SUG office">
+  <img src="https://umarbellotafida.github.io/sug1.jpg" alt="Excos">
+    <img src="https://umarbellotafida.github.io/umar.webp" alt="Umar">
+    <img src="https://umarbellotafida.github.io/umar1.webp" alt="Umar 1">
+    <img src="https://umarbellotafida.github.io/tafida.webp" alt="Tafida">
+    <img src="https://umarbellotafida.github.io/umar2.webp" alt="Umar 2">
+   <img src="https://umarbellotafida.github.io/profile.webp" alt="Profile">
+  </div>
+</section>
+
+<section id="certificates">
+  <h2>Certificates & Achievements</h2>
+  <div class="gallery">
+    <img src="https://umarbellotafida.github.io/sug.webp" alt="SUG">
+    <img src="https://umarbellotafida.github.io/cisco.webp" alt="Cisco">
+    <img src="https://umarbellotafida.github.io/networking.webp" alt="Networking">
+    <img src="https://umarbellotafida.github.io/cybersecurity.webp" alt="Cybersecurity">
+    <img src="https://umarbellotafida.github.io/accpro.webp" alt="Account Pro">
+    <img src="https://umarbellotafida.github.io/software.webp" alt="Software">
+    <img src="https://umarbellotafida.github.io/sra.webp" alt="SRA">
+    <img src="https://umarbellotafida.github.io/acc.webp" alt="ACC">
   </div>
 </section>
 </main>
 
 <footer>
-  <div class="contact-engineering">
-    <h3>Engineering Contact</h3>
-    <p>For technical collaborations, research opportunities, or security consultations:</p>
-    <div class="contact-methods">
-      <a href="mailto:engineering@yourdomain.com" class="email">engineering@yourdomain.com</a>
-      <a href="https://github.com/umarbellotafida" target="_blank" class="github">GitHub</a>
-      <a href="https://linkedin.com/in/yourprofile" target="_blank" class="linkedin">LinkedIn</a>
-    </div>
+  <div class="social-links">
+    <a href="https://facebook.com/umarbellotafida" target="_blank">Facebook</a>
+    <a href="https://github.com/umarbellotafida" target="_blank">GitHub</a>
+    <a href="https://twitter.com/umarbellotafida" target="_blank">Twitter</a>
+    <a href="https://tiktok.com/@umarbellotafida" target="_blank">TikTok</a>
+    <a href="https://youtube.com/@umarbellotafida" target="_blank">YouTube</a>
   </div>
-  
-  <div class="footer-copyright">
-    © <span id="current-year">2025</span> Engr. Umar Bello Tafida, CISSP | Computer Engineering Portfolio
-  </div>
+  © 2025 Umar Bello Tafida | All rights reserved.
 </footer>
 
 <script src="script.js"></script>
